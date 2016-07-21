@@ -94,7 +94,7 @@ window._wfx_settings.show_message = function(message, color) {
     });
     var text = $('<label/>',
     {
-        css: { 'line-height' : '1.5em', 'clear': 'both', 'color' : color},
+        css: { 'color' : color},
         html: message
     });
     var close = $('<button/>',
@@ -115,36 +115,30 @@ window._wfx_settings.show_message = function(message, color) {
 
 };
 
-//High light features
+//High light features for Demo. This message box will 
 window._wfx_settings.show_feature = function(message, color) {
+    
   	var bgWrap = $('<div/>',
     {
-        css: { 'display' : 'block', 'position' : 'fixed', 'width' : '100%', 'height' : '100%', 'left' : '0', 'top'  : '0', 'background': '#000', 'opacity': '0', 'filter': 'alpha(opacity=70)', 'z-index':'100000'},
+        css: { 'display' : 'block', 'position' : 'fixed', 'width' : '100%', 'height' : '100%', 'left' : '0', 'top'  : '0', 'background': '#000', 'opacity': '0.7', 'filter': 'alpha(opacity=70)', 'z-index':'100000'},
     });
     
     var popup = $('<div/>',
     {
-        css: { 'display' : 'block', 'position' : 'relative', 'width' : '500px', 'background': '#ffcc00', 'padding': '50px 50px 50px 20px', 'border-radius': '15px 50px', 'z-index':'100001', 'margin':'10% auto'}
+        css: { 'display' : 'block', 'position' : 'absolute', 'bottom' : '0', 'right' : '0', 'width' : '300px', 'background': '#ffcc00', 'padding': '50px 50px 50px 20px', 'border-radius': '50px 50px 5px 50px', 'z-index':'100001', 'margin':'10% auto'}
     });
     var text = $('<label/>',
     {
         css: { 'line-height' : '1.5em', 'clear': 'both', 'color' : color, 'font': 'Calibri'},
         html: message
     });
-    var close = $('<button/>',
-    {
-        class: 'ppm_button button',
-        css: { 'float' : 'middle', 'margin' : '10px'},
-        text: 'Close',
-        click: function() {
-        	bgWrap.remove();
-          popup.remove();
-        }
-    });
-    popup.append(text);
-    popup.append(close);
-    $('body').append(bgWrap);
+    
+	popup.append(text);
+    
+	$('body').append(bgWrap);
     $('body').append(popup);
+	
+    $('div[style *= "border-radius: 50px 50px 5px"]').fadeIn(1000).delay(5000).fadeOut(100,function(){popup.remove(); bgWrap.remove()});
 };
 
 // Page specific settings
@@ -232,50 +226,61 @@ window._wfx_settings['page_settings']['create_timesheet'] = {
 // Handling of Status report workflow to launch from the middle.
 window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function(event) {
 	var potential_step;
-    
-/*---------DEMO----------*/    
-    
-////Highlight Mouse over feature -- DEMO -- UNCOMMENT
-//	if (event.step==1) {window._wfx_settings.show_feature('Even if you loose track of mouse which is a common issue in this application, <br><u>Help remembers where you were and what you were trying to do.</u>', 'Black');}
+ 
 ////Highlight Mouse over feature
-//	if (event.step==5) {window._wfx_settings.show_feature('Alleviate user pain point "I have to start again????!!!". <br> The Walk through starts based on where your relative position in the application', 'Black');}
-    
-/*---------DEMO----------*/
-    
-    
-	if(window.location.hash.startsWith("#action:projmgr.projectList&")) {
+	
+	if (event.step==1) 
+		{window._wfx_settings.show_feature('<strong>Watch how Help remembers where you were even if you move your mouse away.</strong>', 'Black');
+		}
+////Highlight Mouse over feature
+	if (event.step==5) {window._wfx_settings.show_feature('<strong>The Walk through starts based on where your relative position in the application. </strong>', 'Black');}
+	
+//This section is for restarting the walkthrough relative to current location.	
+	if(window.location.hash.startsWith			("#action:projmgr.projectList&")) {
 		potential_step = 2;
-	} else if(window.location.hash.startsWith("#action:projmgr.projectProperties&id")) {
+	} else if(window.location.hash.startsWith	("#action:projmgr.projectProperties&id")) {
 		potential_step = 3;
-	} else if(window.location.hash.includes("cop_prj_statusrpt")) {
+	}
+	if(window.location.hash.includes			("cop_prj_statusrpt")) {
 		potential_step = 5;
 	}
+	if(window.location.hash.startsWith			("#action:odf.subObjectProperties&odf_code=cop_prj_statusrpt")) {
+		potential_step = 6;
+	}
+	if(window.location.hash.startsWith			("#action:odf.cop_prj_statusrptProperties&parent_odf_view=projectCreate.subObjList.cop_prj_statusrpt")) {
+		potential_step = 6;
+	}
+	window.alert(potential_step);
 	if (potential_step && event.step < potential_step) {
 		return {"position" : potential_step};
 	}
 };
+
+
 
 // Validate button for New status report.
 window._wfx_settings['page_settings']['create_status_report'] = {
 	"hash" : "#action:odf.subObjectProperties&odf_code=cop_prj_statusrpt",
 	"button_bar" : "#ppm_workspace_bb .ppm_button_bar,form .ppm_button_bar",
 	"validate" : function() {
-		var message;
-		var validation=false;
-		if((document.querySelector('[name="cop_schedule_status"]').selectedIndex == 2 || document.querySelector('[name="cop_schedule_status"]').selectedIndex == 3) && document.querySelector('[name="cop_schedule_exp"]').value.length == 0) {
-			validation=true;
-			message=message+'Variance Explanation is required when Status is not On Track <br>';
+		var message="<strong>Data Integrity Test:</strong> <br>";
+		var invalid=false;
+		if((document.querySelector('[name="cop_schedule_status"]').selectedIndex !=1) && document.querySelector('[name="cop_schedule_exp"]').value.length == 0) {
+			invalid=true;
+			message=message+'<ol type="1"> <li>Variance Explanation is required when Status is not On Track. </li><br>';
 		}
-		if((document.querySelector('[name="cop_scope_status"]').selectedIndex == 2 || document.querySelector('[name="cop_scope_status"]').selectedIndex == 3) && document.querySelector('[name="cop_scope_exp"]').value.length == 0){
-			validation=true;
-			message=message+'scope Explanation is required when Status is not On Track <br>';
+		if((document.querySelector('[name="cop_scope_status"]').selectedIndex !=1) && document.querySelector('[name="cop_scope_exp"]').value.length == 0){
+			invalid=true;
+			message=message+'<li>Scope Explanation is required when Status is not On Track </li><br>';
 		}
-		if((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex == 2 || document.querySelector('[name="cop_cost_eft_status"]').selectedIndex == 3) && document.querySelector('[name="cop_effort_exp"]').value.length == 0){
-			validation=true;
-			message=message+'Cost Effort Explanation is required when Status is not On Track <br>';
+		if((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex !=1) && document.querySelector('[name="cop_effort_exp"]').value.length == 0){
+			invalid=true;
+			message=message+'<li>Cost Effort Explanation is required when Status is not On Track </li></ol><br>';
 		}
-		if (validation){
-			window._wfx_settings.show_message(message, 'red');
+		if (invalid){
+			window._wfx_settings.show_message('<html><body><h2>Ordered List with -</h2><ol>  <li>Coffee</li>  <li>Tea</li>  <li>Milk</li></ol></body></html>', 'red');
+		}else{
+			window._wfx_settings.show_message('<strong>Data Integrity Test: </strong><br> Form conforms to all Applicable business Rules', 'green');
 		}
 	}
 };
@@ -285,22 +290,24 @@ window._wfx_settings['page_settings']['update_status_report'] = {
 	"hash" : "#action:odf.cop_prj_statusrptProperties",
 	"button_bar" : "#ppm_workspace_bb .ppm_button_bar,form .ppm_button_bar",
 	"validate" : function() {
-		var message="";
-		var validation=false;
-		if((document.querySelector('[name="cop_schedule_status"]').selectedIndex == 2 || document.querySelector('[name="cop_schedule_status"]').selectedIndex == 3) && document.querySelector('[name="cop_schedule_exp"]').value.length == 0) {
-			validation=true;
-			message=message+'Variance Explanation is required when Status is not On Track <br>';
+		var message="<strong>Data Integrity Test:</strong> <br>";
+		var invalid=false;
+		if((document.querySelector('[name="cop_schedule_status"]').selectedIndex != 1) && document.querySelector('[name="cop_schedule_exp"]').value.length == 0) {
+			invalid=true;
+			message=message+'<ol type="1"> <li>Variance Explanation is required when Status is not On Track. </li><br>';
 		}
-		if((document.querySelector('[name="cop_scope_status"]').selectedIndex == 2 || document.querySelector('[name="cop_scope_status"]').selectedIndex == 3) && document.querySelector('[name="cop_scope_exp"]').value.length == 0){
-			validation=true;
-			message=message+'Change Explanation is required when Status is not On Track <br>';
+		if((document.querySelector('[name="cop_scope_status"]').selectedIndex != 1) && document.querySelector('[name="cop_scope_exp"]').value.length == 0){
+			invalid=true;
+			message=message+'<li>Scope Explanation is required when Status is not On Track </li><br>';
 		}
-		if((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex == 2 || document.querySelector('[name="cop_cost_eft_status"]').selectedIndex == 3) && document.querySelector('[name="cop_effort_exp"]').value.length == 0){
-			validation=true;
-			message=message+'Cost Effort Explanation is required when Status is not On Track <br>';
+		if((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex !=1) && document.querySelector('[name="cop_effort_exp"]').value.length == 0){
+			invalid=true;
+			message=message+'<li>Cost Effort Explanation is required when Status is not On Track </li></ol><br>';
 		}
-		if (validation){
-			window._wfx_settings.show_message(message, 'red');
+		if (invalid){
+			window._wfx_settings.show_message('<html><body><h2>Ordered List with Numbers</h2><ol type="1">  <li>Coffee</li>  <li>Tea</li>  <li>Milk</li></ol></body></html>', 'red');
+		}else{
+			window._wfx_settings.show_message('<strong>Data Integrity Test:</strong> <br> Form conforms to all Applicable business Rules', 'green');
 		}
 	}
 };
