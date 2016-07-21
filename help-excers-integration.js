@@ -232,10 +232,17 @@ window._wfx_settings['page_settings']['create_timesheet'] = {
 // Handling of Status report workflow to launch from the middle.
 window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function(event) {
 	var potential_step;
-//Highlight Mouse over feature
-	if (event.step==1) {window._wfx_settings.show_feature('Even if you loose track of mouse which is a common issue in this application, <br><u>Help remembers where you were and what you were trying to do.</u>', 'Black');}
-//Highlight Mouse over feature
-	if (event.step==5) {window._wfx_settings.show_feature('Alleviate user pain point "I have to start again????!!!". <br> The Walk through starts based on where your relative position in the application', 'Black');}
+    
+/*---------DEMO----------*/    
+    
+////Highlight Mouse over feature -- DEMO -- UNCOMMENT
+//	if (event.step==1) {window._wfx_settings.show_feature('Even if you loose track of mouse which is a common issue in this application, <br><u>Help remembers where you were and what you were trying to do.</u>', 'Black');}
+////Highlight Mouse over feature
+//	if (event.step==5) {window._wfx_settings.show_feature('Alleviate user pain point "I have to start again????!!!". <br> The Walk through starts based on where your relative position in the application', 'Black');}
+    
+/*---------DEMO----------*/
+    
+    
 	if(window.location.hash.startsWith("#action:projmgr.projectList&")) {
 		potential_step = 2;
 	} else if(window.location.hash.startsWith("#action:projmgr.projectProperties&id")) {
