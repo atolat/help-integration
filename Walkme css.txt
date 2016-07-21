@@ -1,0 +1,89 @@
+/*This changes powered by Walkme to help by excer graphic in balloon  -- START*/
+div.walkme-custom-powered-by-div {
+    font-size: 0px !important;
+}
+	a.walkme-custom-powered-by:after {
+    content: url(https://d2qhvajt3imc89.cloudfront.net/customers/Excers/excerslogo.png) !important;
+}
+/*This changes powered by Walkme to help by excer graphic in balloon -- END*/
+
+/* Changes Powered by WalkMe to Help by Excer graphic and turns off blue bar in widget ---START*/
+
+#walkme-player.walkme-mississippi.walkme-theme-black-blue .walkme-title:after {
+	content: url(https://d2qhvajt3imc89.cloudfront.net/customers/Excers/excerslogo_white.png) !important;
+}
+#walkme-player.walkme-mississippi.walkme-theme-black-blue .walkme-bar {
+	display: none !important;
+}
+#walkme-player.walkme-mississippi {
+	width: 122px !important;
+}
+/* Changes Powered by WalkMe to Help by Excer graphic and turns off blue bar in widget ---END*/
+
+div#walkme-footer.walkme-footer: {
+	content: url(https://d2qhvajt3imc89.cloudfront.net/customers/Excers/excerslogo_white.png) !important;	
+} 
+
+/*Invisible launcher - Forced no click when the Report Status is "Final" when it's actually in draft
+
+div.walkme-launcher-id-43140 .custom-launcher-32381{
+opacity: 0 !important;
+}
+
+Invisible launcher END*/
+	
+
+
+/* Updated Menu Powered by WalkMe to Help by Excer graphic---START */
+/* Turn off Powered by WalkMe*/
+div#walkme-footer .walkme-powered-by, .walkme-powered-by-logo {
+display: none !important;
+}
+
+/* Enter new image */
+#walkme-footer {
+background-image: url("https://d2qhvajt3imc89.cloudfront.net/customers/Excers/excerslogo_white.png") !important;
+background-repeat: no-repeat !important;
+background-position: right !important;
+background-color: #363636 !important;
+left: -11px !important;
+height: 29px !important;
+}
+/* Updated Menu Powered by WalkMe to Help by Excer graphic---END */
+
+
+/*Remove Link from Logo on menu --- START*/
+div.walkme-main div.walkme-footer a.walkme-override-css.walkme-powered-by-wrapper{
+pointer-events: none !important;
+cursor: default !important;
+}
+/*Remove Link from Logo on menu --- END*/
+
+/* PPM Font-Family request ---- START */
+
+.walkme-custom-balloon-button-text,
+.walkme-custom-balloon-content,
+.walkme-custom-balloon-title,
+#walkme-menu.walkme-penguin,
+#walkme-main .walkme-title {
+  font-family: Calibri, Arial, Verdana !important;
+}
+
+.walkme-menu.walkme-penguin .walkme-icon {
+	font-family: 'walkme-widget-font' !important;
+}
+
+
+/* PPM Font-Family request ---- END */
+
+/* Fix Overlay with WalkMe enabled */
+
+.ppm_modal_mask {
+	z-index: 214748364 !important;
+}
+
+/** Fix Menu Width **/
+
+#walkme-menu {
+	width: 450px !important;
+}
