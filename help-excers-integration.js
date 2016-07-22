@@ -9,7 +9,7 @@ window._wfx_settings.z_refresh=true;
 window._wfx_widget={"position":"r", "label":"Excers Help", "mode":"live_here", "ent_id":"d347a8c0-3d47-11e6-8bdf-448a5b5dd1ba"};
 
 //Normalize.css!!
-var normalizeCSS = "\/*! normalize.css v4.1.1 | MIT License | github.com\/necolas\/normalize.css *\/\r\n\r\n\/**\r\n * 1. Change the default font family in all browsers (opinionated).\r\n * 2. Prevent adjustments of font size after orientation changes in IE and iOS.\r\n *\/\r\n\r\nhtml {\r\n  font-family: sans-serif; \/* 1 *\/\r\n  -ms-text-size-adjust: 100%; \/* 2 *\/\r\n  -webkit-text-size-adjust: 100%; \/* 2 *\/\r\n}\r\n\r\n\/**\r\n * Remove the margin in all browsers (opinionated).\r\n *\/\r\n\r\nbody {\r\n  margin: 0;\r\n}\r\n\r\n\/* HTML5 display definitions\r\n   ========================================================================== *\/\r\n\r\n\/**\r\n * Add the correct display in IE 9-.\r\n * 1. Add the correct display in Edge, IE, and Firefox.\r\n * 2. Add the correct display in IE.\r\n *\/\r\n\r\narticle,\r\naside,\r\ndetails, \/* 1 *\/\r\nfigcaption,\r\nfigure,\r\nfooter,\r\nheader,\r\nmain, \/* 2 *\/\r\nmenu,\r\nnav,\r\nsection,\r\nsummary { \/* 1 *\/\r\n  display: block;\r\n}\r\n\r\n\/**\r\n * Add the correct display in IE 9-.\r\n *\/\r\n\r\naudio,\r\ncanvas,\r\nprogress,\r\nvideo {\r\n  display: inline-block;\r\n}\r\n\r\n\/**\r\n * Add the correct display in iOS 4-7.\r\n *\/\r\n\r\naudio:not([controls]) {\r\n  display: none;\r\n  height: 0;\r\n}\r\n\r\n\/**\r\n * Add the correct vertical alignment in Chrome, Firefox, and Opera.\r\n *\/\r\n\r\nprogress {\r\n  vertical-align: baseline;\r\n}\r\n\r\n\/**\r\n * Add the correct display in IE 10-.\r\n * 1. Add the correct display in IE.\r\n *\/\r\n\r\ntemplate, \/* 1 *\/\r\n[hidden] {\r\n  display: none;\r\n}\r\n\r\n\/* Links\r\n   ========================================================================== *\/\r\n\r\n\/**\r\n * 1. Remove the gray background on active links in IE 10.\r\n * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.\r\n *\/\r\n\r\na {\r\n  background-color: transparent; \/* 1 *\/\r\n  -webkit-text-decoration-skip: objects; \/* 2 *\/\r\n}\r\n\r\n\/**\r\n * Remove the outline on focused links when they are also active or hovered\r\n * in all browsers (opinionated).\r\n *\/\r\n\r\na:active,\r\na:hover {\r\n  outline-width: 0;\r\n}\r\n\r\n\/* Text-level semantics\r\n   ========================================================================== *\/\r\n\r\n\/**\r\n * 1. Remove the bottom border in Firefox 39-.\r\n * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.\r\n *\/\r\n\r\nabbr[title] {\r\n  border-bottom: none; \/* 1 *\/\r\n  text-decoration: underline; \/* 2 *\/\r\n  text-decoration: underline dotted; \/* 2 *\/\r\n}\r\n\r\n\/**\r\n * Prevent the duplicate application of `bolder` by the next rule in Safari 6.\r\n *\/\r\n\r\nb,\r\nstrong {\r\n  font-weight: inherit;\r\n}\r\n\r\n\/**\r\n * Add the correct font weight in Chrome, Edge, and Safari.\r\n *\/\r\n\r\nb,\r\nstrong {\r\n  font-weight: bolder;\r\n}\r\n\r\n\/**\r\n * Add the correct font style in Android 4.3-.\r\n *\/\r\n\r\ndfn {\r\n  font-style: italic;\r\n}\r\n\r\n\/**\r\n * Correct the font size and margin on `h1` elements within `section` and\r\n * `article` contexts in Chrome, Firefox, and Safari.\r\n *\/\r\n\r\nh1 {\r\n  font-size: 2em;\r\n  margin: 0.67em 0;\r\n}\r\n\r\n\/**\r\n * Add the correct background and color in IE 9-.\r\n *\/\r\n\r\nmark {\r\n  background-color: #ff0;\r\n  color: #000;\r\n}\r\n\r\n\/**\r\n * Add the correct font size in all browsers.\r\n *\/\r\n\r\nsmall {\r\n  font-size: 80%;\r\n}\r\n\r\n\/**\r\n * Prevent `sub` and `sup` elements from affecting the line height in\r\n * all browsers.\r\n *\/\r\n\r\nsub,\r\nsup {\r\n  font-size: 75%;\r\n  line-height: 0;\r\n  position: relative;\r\n  vertical-align: baseline;\r\n}\r\n\r\nsub {\r\n  bottom: -0.25em;\r\n}\r\n\r\nsup {\r\n  top: -0.5em;\r\n}\r\n\r\n\/* Embedded content\r\n   ========================================================================== *\/\r\n\r\n\/**\r\n * Remove the border on images inside links in IE 10-.\r\n *\/\r\n\r\nimg {\r\n  border-style: none;\r\n}\r\n\r\n\/**\r\n * Hide the overflow in IE.\r\n *\/\r\n\r\nsvg:not(:root) {\r\n  overflow: hidden;\r\n}\r\n\r\n\/* Grouping content\r\n   ========================================================================== *\/\r\n\r\n\/**\r\n * 1. Correct the inheritance and scaling of font size in all browsers.\r\n * 2. Correct the odd `em` font sizing in all browsers.\r\n *\/\r\n\r\ncode,\r\nkbd,\r\npre,\r\nsamp {\r\n  font-family: monospace, monospace; \/* 1 *\/\r\n  font-size: 1em; \/* 2 *\/\r\n}\r\n\r\n\/**\r\n * Add the correct margin in IE 8.\r\n *\/\r\n\r\nfigure {\r\n  margin: 1em 40px;\r\n}\r\n\r\n\/**\r\n * 1. Add the correct box sizing in Firefox.\r\n * 2. Show the overflow in Edge and IE.\r\n *\/\r\n\r\nhr {\r\n  box-sizing: content-box; \/* 1 *\/\r\n  height: 0; \/* 1 *\/\r\n  overflow: visible; \/* 2 *\/\r\n}\r\n\r\n\/* Forms\r\n   ========================================================================== *\/\r\n\r\n\/**\r\n * 1. Change font properties to `inherit` in all browsers (opinionated).\r\n * 2. Remove the margin in Firefox and Safari.\r\n *\/\r\n\r\nbutton,\r\ninput,\r\nselect,\r\ntextarea {\r\n  font: inherit; \/* 1 *\/\r\n  margin: 0; \/* 2 *\/\r\n}\r\n\r\n\/**\r\n * Restore the font weight unset by the previous rule.\r\n *\/\r\n\r\noptgroup {\r\n  font-weight: bold;\r\n}\r\n\r\n\/**\r\n * Show the overflow in IE.\r\n * 1. Show the overflow in Edge.\r\n *\/\r\n\r\nbutton,\r\ninput { \/* 1 *\/\r\n  overflow: visible;\r\n}\r\n\r\n\/**\r\n * Remove the inheritance of text transform in Edge, Firefox, and IE.\r\n * 1. Remove the inheritance of text transform in Firefox.\r\n *\/\r\n\r\nbutton,\r\nselect { \/* 1 *\/\r\n  text-transform: none;\r\n}\r\n\r\n\/**\r\n * 1. Prevent a WebKit bug where (2) destroys native `audio` and `video`\r\n *    controls in Android 4.\r\n * 2. Correct the inability to style clickable types in iOS and Safari.\r\n *\/\r\n\r\nbutton,\r\nhtml [type=\"button\"], \/* 1 *\/\r\n[type=\"reset\"],\r\n[type=\"submit\"] {\r\n  -webkit-appearance: button; \/* 2 *\/\r\n}\r\n\r\n\/**\r\n * Remove the inner border and padding in Firefox.\r\n *\/\r\n\r\nbutton::-moz-focus-inner,\r\n[type=\"button\"]::-moz-focus-inner,\r\n[type=\"reset\"]::-moz-focus-inner,\r\n[type=\"submit\"]::-moz-focus-inner {\r\n  border-style: none;\r\n  padding: 0;\r\n}\r\n\r\n\/**\r\n * Restore the focus styles unset by the previous rule.\r\n *\/\r\n\r\nbutton:-moz-focusring,\r\n[type=\"button\"]:-moz-focusring,\r\n[type=\"reset\"]:-moz-focusring,\r\n[type=\"submit\"]:-moz-focusring {\r\n  outline: 1px dotted ButtonText;\r\n}\r\n\r\n\/**\r\n * Change the border, margin, and padding in all browsers (opinionated).\r\n *\/\r\n\r\nfieldset {\r\n  border: 1px solid #c0c0c0;\r\n  margin: 0 2px;\r\n  padding: 0.35em 0.625em 0.75em;\r\n}\r\n\r\n\/**\r\n * 1. Correct the text wrapping in Edge and IE.\r\n * 2. Correct the color inheritance from `fieldset` elements in IE.\r\n * 3. Remove the padding so developers are not caught out when they zero out\r\n *    `fieldset` elements in all browsers.\r\n *\/\r\n\r\nlegend {\r\n  box-sizing: border-box; \/* 1 *\/\r\n  color: inherit; \/* 2 *\/\r\n  display: table; \/* 1 *\/\r\n  max-width: 100%; \/* 1 *\/\r\n  padding: 0; \/* 3 *\/\r\n  white-space: normal; \/* 1 *\/\r\n}\r\n\r\n\/**\r\n * Remove the default vertical scrollbar in IE.\r\n *\/\r\n\r\ntextarea {\r\n  overflow: auto;\r\n}\r\n\r\n\/**\r\n * 1. Add the correct box sizing in IE 10-.\r\n * 2. Remove the padding in IE 10-.\r\n *\/\r\n\r\n[type=\"checkbox\"],\r\n[type=\"radio\"] {\r\n  box-sizing: border-box; \/* 1 *\/\r\n  padding: 0; \/* 2 *\/\r\n}\r\n\r\n\/**\r\n * Correct the cursor style of increment and decrement buttons in Chrome.\r\n *\/\r\n\r\n[type=\"number\"]::-webkit-inner-spin-button,\r\n[type=\"number\"]::-webkit-outer-spin-button {\r\n  height: auto;\r\n}\r\n\r\n\/**\r\n * 1. Correct the odd appearance in Chrome and Safari.\r\n * 2. Correct the outline style in Safari.\r\n *\/\r\n\r\n[type=\"search\"] {\r\n  -webkit-appearance: textfield; \/* 1 *\/\r\n  outline-offset: -2px; \/* 2 *\/\r\n}\r\n\r\n\/**\r\n * Remove the inner padding and cancel buttons in Chrome and Safari on OS X.\r\n *\/\r\n\r\n[type=\"search\"]::-webkit-search-cancel-button,\r\n[type=\"search\"]::-webkit-search-decoration {\r\n  -webkit-appearance: none;\r\n}\r\n\r\n\/**\r\n * Correct the text style of placeholders in Chrome, Edge, and Safari.\r\n *\/\r\n\r\n::-webkit-input-placeholder {\r\n  color: inherit;\r\n  opacity: 0.54;\r\n}\r\n\r\n\/**\r\n * 1. Correct the inability to style clickable types in iOS and Safari.\r\n * 2. Change font properties to `inherit` in Safari.\r\n *\/\r\n\r\n::-webkit-file-upload-button {\r\n  -webkit-appearance: button; \/* 1 *\/\r\n  font: inherit; \/* 2 *\/\r\n}";
+var normalizeCSS = "<style>b\r\n, strong {\r\n    font - weight: inherit;\r\n}\r\n\r\n\r\nb\r\n, strong {\r\n    font - weight: bolder;\r\n}\r\n\r\n\r\n\r\ndfn {\r\n    font - style: italic;\r\n}\r\n\r\n\r\n\r\nh1 {\r\n\t    display: block;\r\n\t    font-size: 2em;\r\n\t    -webkit-margin-before: 0.67__qem;\r\n\t    -webkit-margin-after: 0.67em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\r\nstrong, b {\r\n    font-weight: bold;\r\n\t}\r\n\r\n\r\n\/\/Lists\r\nul { \r\n   list-style-type: disc; \r\n   list-style-position: inside; \r\n}\r\nol { \r\n   list-style-type: decimal; \r\n   list-style-position: inside; \r\n}\r\nul ul, ol ul { \r\n   list-style-type: circle; \r\n   list-style-position: inside; \r\n   margin-left: 15px; \r\n}\r\nol ol, ul ol { \r\n   list-style-type: lower-latin; \r\n   list-style-position: inside; \r\n   margin-left: 15px; \r\n}\r\n\r\n\/\/Tables\r\ntable {\r\n\t    display: table;\r\n\t    border-collapse: separate;\r\n\t    border-spacing: 2px;\r\n\t    border-color: gray;\r\n\t}\r\n\t\r\n\tthead {\r\n\t    display: table-header-group;\r\n\t    vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttbody {\r\n\t    display: table-row-group;\r\n vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttfoot {\r\n\t    display: table-footer-group;\r\n\t    vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\t\/* for tables without table section elements (can happen with XHTML or dynamically created tables) *\/\r\n\ttable > tr {\r\n\t    vertical-align: middle;\r\n\t}\r\n\t\r\n\tcol {\r\n\t    display: table-column;\r\n}\r\n\t\r\n\tcolgroup {\r\n\t    display: table-column-group;\r\n\t}\r\n\t\r\n\ttr {\r\n\t    display: table-row;\r\n\t    vertical-align: inherit;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttd, th {\r\n\t    display: table-cell;\r\n\t    vertical-align: inherit;\r\n\t}\r\n\t\r\nth {\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\tcaption {\r\n\t    display: table-caption;\r\n\t    text-align: -webkit-center;\r\n\t}<\/style>";
 
 
 //
@@ -85,6 +85,8 @@ window._wfx_settings.init_page = function(name, settings) {
 	}
 };
 
+
+//For General Messages...
 window._wfx_settings.show_message = function(message, color) {
   	var bgWrap = $('<div/>',
     {
@@ -118,7 +120,7 @@ window._wfx_settings.show_message = function(message, color) {
 
 };
 
-//High light features for Demo. This message box will 
+//High light features for Demo.
 window._wfx_settings.show_feature = function(message, color) {
     
   	var bgWrap = $('<div/>',
@@ -132,9 +134,9 @@ window._wfx_settings.show_feature = function(message, color) {
     });
     var text = $('<label/>',
     {
-        css: { 'line-height' : '1.5em', 'clear': 'both', 'color' : color, 'font': 'Calibri'},
-        strong: {'font-weight':'bold'},
-        html: message
+        //css: { 'line-height' : '1.5em', 'clear': 'both', 'color' : color, 'font': 'Calibri'},
+        //strong: {'font-weight':'bold'},
+        html: normalizeCSS+' '+message
     });
     
 	popup.append(text);
@@ -147,7 +149,7 @@ window._wfx_settings.show_feature = function(message, color) {
 
 
 
-//Shoutout--Landing Page!!
+//Shoutout!!
 window._wfx_settings.shoutout = function(message, color) {
     
   	var bgWrap = $('<div/>',
@@ -157,16 +159,21 @@ window._wfx_settings.shoutout = function(message, color) {
     
     var popup = $('<div/>',
     {
-        css: { 'display' : 'block', 'position' : 'relative', 'width' : '300px', 'background': '#ffcc00', 'padding': '50px 50px 50px 20px', 'border-radius': '50px 50px 5px 50px', 'z-index':'100001', 'margin':'10% auto'}
+        css: { 'display' : 'block', 'position' : 'relative', 'width' : '300px', 'background': '#ffcc00', 'padding': '50px 50px 50px 20px', 'border-radius': '15px 50px', 'z-index':'100001', 'margin':'10% auto'}
     });
-    var text = normalizeCSS+' '+message; 
+    var text = $('<label/>',
+    {
+        //css: { 'line-height' : '1.5em', 'clear': 'both', 'color' : color, 'font': 'Calibri'},
+        //strong: {'font-weight':'bold'},
+        html: normalizeCSS+' '+message
+    });
     
 	popup.append(text);
     
 	$('body').append(bgWrap);
     $('body').append(popup);
 	
-    $('div[style *= "border-radius: 50px 50px 5px"]').fadeIn(1000).delay(5000).fadeOut(100,function(){popup.remove(); bgWrap.remove()});
+    $('div[style *= "border-radius: 15px 50px"]').fadeIn(1000).delay(5000).fadeOut(100,function(){popup.remove(); bgWrap.remove()});
 };
 
 // Page specific settings
@@ -254,9 +261,10 @@ window._wfx_settings['page_settings']['create_timesheet'] = {
 // Handling of Status report workflow to launch from the middle.
 window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function(event) {
 	var potential_step;
-//Shoutout-- Tied to page URI
+
+    //Shoutout-- Tied to landing page URI
     if(document.documentURI == 'http://ppmcontent.excers.com/niku/nu#action:npt.overview' && event.step!=1){
-        window._wfx_settings.shoutout("<h1>Test</h1>",'red');
+        window._wfx_settings.shoutout("<h1>SHOUTOUT</h1>",'red');
     }
     
     
@@ -265,7 +273,7 @@ window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function(event) {
 ////Highlight Mouse over feature
 	
 	if (event.step==1) 
-		{window._wfx_settings.show_feature('<strong>Watch how Help </strong>remembers where you were even if you move your mouse away.', 'Black');
+		{window._wfx_settings.show_feature('<h1>H1 works</h1><br><strong>Strong works</strong>', 'Black');
 		}
 ////Highlight Mouse over feature
 	if (event.step==5) {window._wfx_settings.show_feature('<strong>The Walk through starts based on where your relative position in the application. </strong>', 'Black');}
@@ -280,7 +288,7 @@ window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function(event) {
 		potential_step = 5;
 	}
 	if(window.location.hash.startsWith			("#action:odf.subObjectProperties&odf_code=cop_prj_statusrpt")) {
-		potential_step = 6;
+		potential_step = 6;   
 	}
 	if(window.location.hash.startsWith			("#action:odf.cop_prj_statusrptProperties&parent_odf_view=projectCreate.subObjList.cop_prj_statusrpt")) {
 		potential_step = 6;
