@@ -1,3 +1,4 @@
+//Strong
 b
 , strong {
     font - weight: inherit;
@@ -15,7 +16,7 @@ dfn {
     font - style: italic;
 }
 
-
+//Headers
 
 h1 {
 	    display: block;
@@ -29,6 +30,55 @@ h1 {
 
 strong, b {
     font-weight: bold;
+	}
+
+h2 {
+	    display: block;
+	    font-size: 1.5em;
+	    -webkit-margin-before: 0.83__qem;
+	    -webkit-margin-after: 0.83em;
+	    -webkit-margin-start: 0;
+	    -webkit-margin-end: 0;
+	    font-weight: bold;
+	}
+	
+	h3 {
+	    display: block;
+	    font-size: 1.17em;
+	    -webkit-margin-before: 1__qem;
+	    -webkit-margin-after: 1em;
+	    -webkit-margin-start: 0;
+	    -webkit-margin-end: 0;
+	    font-weight: bold;
+	}
+	
+	h4 {
+	    display: block;
+	    -webkit-margin-before: 1.33__qem;
+	    -webkit-margin-after: 1.33em;
+	    -webkit-margin-start: 0;
+	    -webkit-margin-end: 0;
+	    font-weight: bold;
+	}
+	
+	h5 {
+	    display: block;
+	    font-size: .83em;
+	    -webkit-margin-before: 1.67__qem;
+	    -webkit-margin-after: 1.67em;
+	    -webkit-margin-start: 0;
+	    -webkit-margin-end: 0;
+	    font-weight: bold;
+	}
+	
+	h6 {
+	    display: block;
+	    font-size: .67em;
+	    -webkit-margin-before: 2.33__qem;
+	    -webkit-margin-after: 2.33em;
+	    -webkit-margin-start: 0;
+	    -webkit-margin-end: 0;
+	    font-weight: bold;
 	}
 
 
@@ -110,3 +160,8 @@ th {
 	    display: table-caption;
 	    text-align: -webkit-center;
 	}
+
+//Button
+button {
+	    -webkit-appearance: button;
+}
