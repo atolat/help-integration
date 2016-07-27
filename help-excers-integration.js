@@ -96,6 +96,26 @@ window._wfx_settings.add_button = function (name, button, parentSelector, action
 };
 
 
+//New Button for Validation
+window._wfx_settings.add_button_validate_two = function (name, button, parentSelector, action) {
+    var validate_two_id = "wfx_" + name + "_validate_two";
+    if (document.getElementById(validate_two_id)) {
+        return;
+    }
+    var validate_two = $('<button/>', {
+        text: button
+        , class: 'ppm_button button'
+        , css: {
+            'background': '#ED9126'
+            , 'color': 'white'
+        }
+        , click: action
+        , id: validate_two_id
+    });
+    $(parentSelector).append(validate_two);
+};
+
+
 
 
 /*--------------------------------------------------------------------------------------*/
@@ -368,7 +388,12 @@ window._wfx_settings.init_page = function (name, settings) {
 
     // Validate button addition.
     if (settings.validate) {
-        window._wfx_settings.add_button(name, "Validate", settings.button_bar, settings.validate);
+        window._wfx_settings.add_button(name, "Validate 1", settings.button_bar, settings.validate);
+    }
+    
+    // Validate button addition.
+    if (settings.validate_two) {
+        window._wfx_settings.add_button_validate_two(name, "Validate 2", settings.button_bar, settings.validate_two);
     }
 
     //Report Status button addition.
@@ -693,34 +718,10 @@ var status_report_validate = function () {
     var invalid = false;
     //For name field validation
     var str = document.querySelector('[maxlength="80"]').value;
-
-
-    //        $('[name="cop_report_status"]').append('<button xmlns:urlencoder="java:java.net.URLEncoder" type="button"  style="  " class="ppm_button ">Show Table</button>').click(function () {
-    //           window._wfx_settings.show_message('Table Goes Here'); 
-    //        });
-    //
-    //    var showHelp = $('<button/>', {
-    //        text: 'button'
-    //        , class: 'ppm_button button'
-    //        , css: {
-    //            'background': '#ED9126'
-    //            , 'color': 'white'
-    //        }
-    //        , click: function () {
-    //            window._wfx_settings.show_message('Table Goes Here');
-    //        },
-    //
-    //    });
-    //
-    //    $('[name="cop_report_status"]').append(showHelp);
-
-
     var date_regex = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
     var res = date_regex.test(str.substring(14)) && str.includes('Week Ending');
 
     if (res == false) {
-        //window.alert(res);
-        //message = message + '<tr><td class="tg-yw4l">Report Name</td><td class="tg-yw4l">Not entered in correct format.</td></tr>';
         $('[maxlength="80"]').css({
             'border-color': 'red'
         }).css({
@@ -737,9 +738,6 @@ var status_report_validate = function () {
 
 
     if ((document.querySelector('[name="cop_schedule_status"]').selectedIndex == 0)) {
-        //invalid = true;
-        //no_page_errors = no_page_errors - 1;
-        //message = message + '<tr><td class="tg-yw4l">Schedule Status</td><td class="tg-yw4l">Required by PMO.</td></tr>';
         $('[name="cop_schedule_status"]').css({
             'border-color': 'red'
         }).css({
@@ -754,9 +752,6 @@ var status_report_validate = function () {
     }
 
     if ((document.querySelector('[name="cop_schedule_status"]').selectedIndex != 1) && document.querySelector('[name="cop_schedule_exp"]').value.length == 0) {
-        //invalid = true;
-        //no_page_errors = no_page_errors - 1;
-        //message = message + '<tr><td class="tg-yw4l">Variance Explanation</td><td class="tg-yw4l">Required when Status is not On Track.</td></tr>';
         $('[name="cop_schedule_exp"]').css({
             'border-color': 'red'
         }).css({
@@ -772,9 +767,6 @@ var status_report_validate = function () {
 
 
     if ((document.querySelector('[name="cop_scope_status"]').selectedIndex == 0)) {
-        //invalid = true;
-        //no_page_errors = no_page_errors - 1;
-        //message = message + '<tr><td class="tg-yw4l">Scope Status</td><td class="tg-yw4l">Required by PMO.</td></tr>';
         $('[name="cop_scope_status"]').css({
             'border-color': 'red'
         }).css({
@@ -791,9 +783,6 @@ var status_report_validate = function () {
 
 
     if ((document.querySelector('[name="cop_scope_status"]').selectedIndex != 1) && document.querySelector('[name="cop_scope_exp"]').value.length == 0) {
-        //invalid = true;
-        //no_page_errors = no_page_errors - 1;
-        //message = message + '<tr><td class="tg-yw4l">Scope Explanation</td><td class="tg-yw4l">Required when Status is not On Track</td></tr>';
         $('[name="cop_scope_exp"]').css({
             'border-color': 'red'
         }).css({
@@ -809,9 +798,6 @@ var status_report_validate = function () {
     }
 
     if ((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex == 0)) {
-        //invalid = true;
-        //no_page_errors = no_page_errors - 1;
-        //message = message + '<tr><td class="tg-yw4l">Cost and Schedule Status</td><td class="tg-yw4l">Required by PMO.</td></tr>';
         $('[name="cop_cost_eft_status"]').css({
             'border-color': 'red'
         }).css({
@@ -828,9 +814,6 @@ var status_report_validate = function () {
 
 
     if ((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex != 1) && document.querySelector('[name="cop_effort_exp"]').value.length == 0) {
-        //invalid = true;
-        //no_page_errors = no_page_errors - 1;
-        //message = message + '<tr><td class="tg-yw4l">Cost Effort Explanation</td><td class="tg-yw4l">Required when Status is not On Track.</td></tr>';
         $('[name="cop_effort_exp"]').css({
             'border-color': 'red'
         }).css({
@@ -845,13 +828,83 @@ var status_report_validate = function () {
         }).attr('title', 'Good Job!');
     }
 
-    //display_no_errors = no_page_errors / no_page_validations * 100;
-    //var compliance = '<table class="tg"><tr><th class="tg-yw4l">PMO Status Report Compliance</th>    <th class="tg-yw4l">' + display_no_errors + '%</th></tr></table><table class="tg"><br><br>';
-    //if (invalid) {
-    //window._wfx_settings.show_message(title + compliance + business_negative_message + message + "</table>", '#e62e00');
-    //} else {
-    //window._wfx_settings.show_message(title + compliance + message + "</table>", '#00b33c');
-    //}
+}
+
+var status_report_validate_two = function () {
+
+    var title = "<h3>Status Report Validation Results</h3>";
+    var business_positive_message = "<strong>Form conforms to PMO standards</strong><br>";
+    var business_negative_message = "<strong>Action required to conform with PMO Standards</strong><br></br>";
+    var message = '<style type="text/css">.tg  {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg .tg-yw4l{vertical-align:top}</style>';
+
+    var no_page_errors = 10;
+    var no_page_validations = 10; //Should total the number of validations performed.
+    var display_no_errors = 0.0;
+    var invalid = false;
+    //For name field validation
+    var str = document.querySelector('[maxlength="80"]').value;
+    var date_regex = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
+    var res = date_regex.test(str.substring(14)) && str.includes('Week Ending');
+
+    if (res == false) {
+     
+        message = message + '<tr><td class="tg-yw4l">Report Name</td><td class="tg-yw4l">Not entered in correct format.</td></tr>';
+
+    } 
+
+
+    if ((document.querySelector('[name="cop_schedule_status"]').selectedIndex == 0)) {
+        invalid = true;
+        no_page_errors = no_page_errors - 1;
+        message = message + '<tr><td class="tg-yw4l">Schedule Status</td><td class="tg-yw4l">Required by PMO.</td></tr>';
+
+    } 
+
+    if ((document.querySelector('[name="cop_schedule_status"]').selectedIndex != 1) && document.querySelector('[name="cop_schedule_exp"]').value.length == 0) {
+        invalid = true;
+        no_page_errors = no_page_errors - 1;
+        message = message + '<tr><td class="tg-yw4l">Variance Explanation</td><td class="tg-yw4l">Required when Status is not On Track.</td></tr>';
+        
+    }
+
+
+    if ((document.querySelector('[name="cop_scope_status"]').selectedIndex == 0)) {
+        invalid = true;
+        no_page_errors = no_page_errors - 1;
+        message = message + '<tr><td class="tg-yw4l">Scope Status</td><td class="tg-yw4l">Required by PMO.</td></tr>';
+       
+    }
+
+
+    if ((document.querySelector('[name="cop_scope_status"]').selectedIndex != 1) && document.querySelector('[name="cop_scope_exp"]').value.length == 0) {
+        invalid = true;
+        no_page_errors = no_page_errors - 1;
+        message = message + '<tr><td class="tg-yw4l">Scope Explanation</td><td class="tg-yw4l">Required when Status is not On Track</td></tr>';
+
+    }
+
+    if ((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex == 0)) {
+        invalid = true;
+        no_page_errors = no_page_errors - 1;
+        message = message + '<tr><td class="tg-yw4l">Cost and Schedule Status</td><td class="tg-yw4l">Required by PMO.</td></tr>';
+        
+    }
+
+
+    if ((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex != 1) && document.querySelector('[name="cop_effort_exp"]').value.length == 0) {
+        invalid = true;
+        no_page_errors = no_page_errors - 1;
+        message = message + '<tr><td class="tg-yw4l">Cost Effort Explanation</td><td class="tg-yw4l">Required when Status is not On Track.</td></tr>';
+       
+    }
+
+    display_no_errors = no_page_errors / no_page_validations * 100;
+    var compliance = '<table class="tg"><tr><th class="tg-yw4l">PMO Status Report Compliance</th>    <th class="tg-yw4l">' + display_no_errors + '%</th></tr></table><table class="tg"><br><br>';
+    if (invalid) {
+    window._wfx_settings.show_message(title + compliance + business_negative_message + message + "</table>", '#e62e00');
+    } else {
+    window._wfx_settings.show_message(title + compliance + message + "</table>", '#00b33c');
+    }
 }
 
 
@@ -860,7 +913,7 @@ var status_report_validate = function () {
 
 
 /*----------------------------------------------------------------------------*/
-// Validate button for New status report.
+// Validate one button for New status report.
 window._wfx_settings['page_settings']['create_status_report'] = {
     "hash": "#action:odf.subObjectProperties"
     , "button_bar": "#ppm_workspace_bb .ppm_button_bar,form .ppm_button_bar"
@@ -868,11 +921,30 @@ window._wfx_settings['page_settings']['create_status_report'] = {
 };
 
 
-// Validate button for Existing status report.
+// Validate two button for Existing status report.
 window._wfx_settings['page_settings']['update_status_report'] = {
     "hash": "#action:odf.cop_prj_statusrptProperties"
     , "button_bar": "#ppm_workspace_bb .ppm_button_bar,form .ppm_button_bar"
     , "validate": status_report_validate
+};
+
+
+/*----------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------*/
+// Validate one button for New status report.
+window._wfx_settings['page_settings']['create_status_report_two'] = {
+    "hash": "#action:odf.subObjectProperties"
+    , "button_bar": "#ppm_workspace_bb .ppm_button_bar,form .ppm_button_bar"
+    , "validate_two": status_report_validate_two
+};
+
+
+// Validate two button for Existing status report.
+window._wfx_settings['page_settings']['update_status_report_two'] = {
+    "hash": "#action:odf.cop_prj_statusrptProperties"
+    , "button_bar": "#ppm_workspace_bb .ppm_button_bar,form .ppm_button_bar"
+    , "validate_two": status_report_validate_two
 };
 
 
