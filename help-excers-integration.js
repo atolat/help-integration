@@ -390,7 +390,7 @@ window._wfx_settings.init_page = function (name, settings) {
     if (settings.validate) {
         window._wfx_settings.add_button(name, "Validate 1", settings.button_bar, settings.validate);
     }
-    
+
     // Validate button addition.
     if (settings.validate_two) {
         window._wfx_settings.add_button_validate_two(name, "Validate 2", settings.button_bar, settings.validate_two);
@@ -720,19 +720,24 @@ var status_report_validate = function () {
     var str = document.querySelector('[maxlength="80"]').value;
     var date_regex = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
     var res = date_regex.test(str.substring(14)) && str.includes('Week Ending');
+    var valtip = $("<warn/>", {
+            'class': 'tooltips'
+            ,'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>This will be really cool if it works!!</msg>'
+        }).append('<style>\r\nwarn.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  height: 30px;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    var repname = $('[maxlength="80"]');
 
     if (res == false) {
-        $('[maxlength="80"]').css({
-            'border-color': 'red'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Please Enter the Name in Correct Format: "Week Ending - MM/DD/YYYY"');
+        if(!($('warn').length)){
+        repname = repname.addClass('animation').append('<style>\r\n.animation{\r\n  animation: .5s animateBorderOne ease infinite;\r\n}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n    outline-color: red;\r\n    box-shadow: 0 0 0 2px red;\r\n  }\r\n}<\/style>');
+        repname = repname.after(valtip);
+        }
+
     } else {
-        $('[maxlength="80"]').css({
-            'border-color': 'blue'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Good Job!');
+        $('warn').remove();
+        repname = repname.removeClass("animation");
+        if(!($('tick').length)){
+            repname.after('<tick>&nbsp;&nbsp;&nbsp;&#10004</tick>');
+        }
 
     }
 
@@ -847,10 +852,10 @@ var status_report_validate_two = function () {
     var res = date_regex.test(str.substring(14)) && str.includes('Week Ending');
 
     if (res == false) {
-     
+
         message = message + '<tr><td class="tg-yw4l">Report Name</td><td class="tg-yw4l">Not entered in correct format.</td></tr>';
 
-    } 
+    }
 
 
     if ((document.querySelector('[name="cop_schedule_status"]').selectedIndex == 0)) {
@@ -858,13 +863,13 @@ var status_report_validate_two = function () {
         no_page_errors = no_page_errors - 1;
         message = message + '<tr><td class="tg-yw4l">Schedule Status</td><td class="tg-yw4l">Required by PMO.</td></tr>';
 
-    } 
+    }
 
     if ((document.querySelector('[name="cop_schedule_status"]').selectedIndex != 1) && document.querySelector('[name="cop_schedule_exp"]').value.length == 0) {
         invalid = true;
         no_page_errors = no_page_errors - 1;
         message = message + '<tr><td class="tg-yw4l">Variance Explanation</td><td class="tg-yw4l">Required when Status is not On Track.</td></tr>';
-        
+
     }
 
 
@@ -872,7 +877,7 @@ var status_report_validate_two = function () {
         invalid = true;
         no_page_errors = no_page_errors - 1;
         message = message + '<tr><td class="tg-yw4l">Scope Status</td><td class="tg-yw4l">Required by PMO.</td></tr>';
-       
+
     }
 
 
@@ -887,7 +892,7 @@ var status_report_validate_two = function () {
         invalid = true;
         no_page_errors = no_page_errors - 1;
         message = message + '<tr><td class="tg-yw4l">Cost and Schedule Status</td><td class="tg-yw4l">Required by PMO.</td></tr>';
-        
+
     }
 
 
@@ -895,15 +900,15 @@ var status_report_validate_two = function () {
         invalid = true;
         no_page_errors = no_page_errors - 1;
         message = message + '<tr><td class="tg-yw4l">Cost Effort Explanation</td><td class="tg-yw4l">Required when Status is not On Track.</td></tr>';
-       
+
     }
 
     display_no_errors = no_page_errors / no_page_validations * 100;
     var compliance = '<table class="tg"><tr><th class="tg-yw4l">PMO Status Report Compliance</th>    <th class="tg-yw4l">' + display_no_errors + '%</th></tr></table><table class="tg"><br><br>';
     if (invalid) {
-    window._wfx_settings.show_message(title + compliance + business_negative_message + message + "</table>", '#e62e00');
+        window._wfx_settings.show_message(title + compliance + business_negative_message + message + "</table>", '#e62e00');
     } else {
-    window._wfx_settings.show_message(title + compliance + message + "</table>", '#00b33c');
+        window._wfx_settings.show_message(title + compliance + message + "</table>", '#00b33c');
     }
 }
 
