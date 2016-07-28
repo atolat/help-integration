@@ -1,10 +1,14 @@
-//
-// Base Whatfix configuration.
-//
+/*------------------------------------------------------------------------------------------------------------------------------------/
+                                        ##Integration Script for "Help" by Excers.## 
+    >>This script is developed for CAPPM's training instance for demonstration of the tool, using the "Create a Status Report Flow".
+*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+// Initial Configurations
 
 // Whatfix setting change to let the tip come over menu.
 window._wfx_settings.z_refresh = true;
-
 
 // Generic self help widget.
 window._wfx_widget = {
@@ -15,51 +19,6 @@ window._wfx_widget = {
     , "color": "#808080"
 
 };
-
-
-//Logic for Handling Saved Reports-- onclick "Save Button"
-var hashStr = function () {
-    var str = document.location.hash;
-    var patt = new RegExp("odf_pk=");
-    var res = patt.test(str);
-    var reqHash = '';
-    if (res == true) {
-        return reqHash + document.location.hash;
-    } else {
-        return reqHash;
-    }
-}
-
-
-
-
-//Uncomment to change widget colors --Experimantal
-//window._wfx_settings= { "theme":{
-//    "color1":"#2b3f57",
-//    "color2":"#3458a2",
-//    "color3":"#f4f4f4",
-//    "color5":"#2b3f57",
-//    "font":"verdana",
-//    "font_size": "14px",
-//    "line_height":"20px",
-//    "title_size":"16px",
-//    "foot_size":"12px",
-//    "widget_size":"14px",
-//    "font_css":"https://fonts.googleapis.com/css?family=Roboto|Oswald",
-//    "note_style":"italic",
-//}};
-
-//Normalize.css!!
-var normalizeCSS = "<style>\/\/Strong\r\nb\r\n, strong {\r\n    font - weight: inherit;\r\n}\r\n\r\n\r\nb\r\n, strong {\r\n    font - weight: bolder;\r\n}\r\n\r\n\r\n\r\ndfn {\r\n    font - style: italic;\r\n}\r\n\r\n\/\/Headers\r\n\r\nh1 {\r\n\t    display: block;\r\n\t    font-size: 2em;\r\n\t    -webkit-margin-before: 0.67__qem;\r\n\t    -webkit-margin-after: 0.67em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\r\nstrong, b {\r\n    font-weight: bold;\r\n\t}\r\n\r\nh2 {\r\n\t    display: block;\r\n\t    font-size: 1.5em;\r\n\t    -webkit-margin-before: 0.83__qem;\r\n\t    -webkit-margin-after: 0.83em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th3 {\r\n\t    display: block;\r\n\t    font-size: 1.17em;\r\n\t    -webkit-margin-before: 1__qem;\r\n\t    -webkit-margin-after: 1em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th4 {\r\n\t    display: block;\r\n\t    -webkit-margin-before: 1.33__qem;\r\n\t    -webkit-margin-after: 1.33em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th5 {\r\n\t    display: block;\r\n\t    font-size: .83em;\r\n\t    -webkit-margin-before: 1.67__qem;\r\n\t    -webkit-margin-after: 1.67em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th6 {\r\n\t    display: block;\r\n\t    font-size: .67em;\r\n\t    -webkit-margin-before: 2.33__qem;\r\n\t    -webkit-margin-after: 2.33em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\r\n\r\n\/\/Lists\r\nul { \r\n   list-style-type: disc; \r\n   list-style-position: inside; \r\n}\r\nol { \r\n   list-style-type: decimal; \r\n   list-style-position: inside; \r\n}\r\nul ul, ol ul { \r\n   list-style-type: circle; \r\n   list-style-position: inside; \r\n   margin-left: 15px; \r\n}\r\nol ol, ul ol { \r\n   list-style-type: lower-latin; \r\n   list-style-position: inside; \r\n   margin-left: 15px; \r\n}\r\n\r\n\/\/Tables\r\ntable {\r\n\t    display: table;\r\n\t    border-collapse: separate;\r\n\t    border-spacing: 2px;\r\n\t    border-color: gray;\r\n\t}\r\n\t\r\n\tthead {\r\n\t    display: table-header-group;\r\n\t    vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttbody {\r\n\t    display: table-row-group;\r\n vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttfoot {\r\n\t    display: table-footer-group;\r\n\t    vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\t\/* for tables without table section elements (can happen with XHTML or dynamically created tables) *\/\r\n\ttable > tr {\r\n\t    vertical-align: middle;\r\n\t}\r\n\t\r\n\tcol {\r\n\t    display: table-column;\r\n}\r\n\t\r\n\tcolgroup {\r\n\t    display: table-column-group;\r\n\t}\r\n\t\r\n\ttr {\r\n\t    display: table-row;\r\n\t    vertical-align: inherit;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttd, th {\r\n\t    display: table-cell;\r\n\t    vertical-align: inherit;\r\n\t}\r\n\t\r\nth {\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\tcaption {\r\n\t    display: table-caption;\r\n\t    text-align: -webkit-center;\r\n\t}\r\n\r\n\/\/Button\r\nbutton {\r\n\t    -webkit-appearance: button;\r\n}<\/style>";
-
-var toolTipCss = '     <style>\r\n  .ui-tooltip {\r\n    display: inline-block;\r\n    background: #808080;\r\n    border: 2px solid white;\r\n  }\r\n  .ui-tooltip {\r\n    padding: 10px 20px;\r\n    color: white;\r\n    border-radius: 20px;\r\n    box-shadow: 0 0 7px black;\r\n  }\r\n\r\n.tg  {border-collapse:collapse;border-spacing:0;}\r\n.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}\r\n.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}\r\n.tg .tg-yw4l{vertical-align:top}\r\n\r\n \r\n  <\/style>\r\n';
-
-var buttonCss = '<style>\r\n.button-hov {\r\n  display: inline-block;\r\n position: absolute;\r\n right: 20px; inline-block;\r\n  border-radius: 100%;\r\n  background-color: #808080;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  text-align: center;\r\n  font-size: 10px;\r\n  padding: 6px;\r\n  transition: all 0.5s;\r\n  cursor: pointer;\r\n  margin: 5px;\r\n}\r\n\r\n.button-hov span {\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  position: relative;\r\n  transition: 0.5s;\r\n}\r\n\r\n.button-hov span:after {\r\n  content: \'\u00BB\';\r\n  position: absolute;\r\n  opacity: 0;\r\n  top: 0;\r\n  right: 20px;\r\n  transition: 0.5s;\r\n}\r\n\r\n.button-hov:hover span {\r\n  padding-right: 25px;\r\n}\r\n\r\n.button-hov:hover span:after {\r\n  opacity: 1;\r\n  right: 0;\r\n}\r\n<\/style>';
-
-
-//
-// Utilities 
-//
 
 // Generic branch trigger.
 window._wfx_settings.onBeforeShow = function (event) {
@@ -76,7 +35,51 @@ window._wfx_settings['default_page_settings'] = {
     "self_help": {}
 };
 
-// "Validate" & "Show Me How" framework
+//Uncomment to change widget colors --Experimantal, might break CSS.
+//window._wfx_settings= { "theme":{
+//    "color1":"#2b3f57",
+//    "color2":"#3458a2",
+//    "color3":"#f4f4f4",
+//    "color5":"#2b3f57",
+//    "font":"verdana",
+//    "font_size": "14px",
+//    "line_height":"20px",
+//    "title_size":"16px",
+//    "foot_size":"12px",
+//    "widget_size":"14px",
+//    "font_css":"https://fonts.googleapis.com/css?family=Roboto|Oswald",
+//    "note_style":"italic",
+//}};
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//Custom CSS-- Overrides CSS definitions from CA PPM's default stylesheet.
+//Defined as strings with global scope.
+//Un-escaped versions attached.
+
+//Normalize CSS
+//Define/Override CSS for text formatting and tables.
+
+var normalizeCSS = "<style>\/\/Strong\r\nb\r\n, strong {\r\n    font - weight: inherit;\r\n}\r\n\r\n\r\nb\r\n, strong {\r\n    font - weight: bolder;\r\n}\r\n\r\n\r\n\r\ndfn {\r\n    font - style: italic;\r\n}\r\n\r\n\/\/Headers\r\n\r\nh1 {\r\n\t    display: block;\r\n\t    font-size: 2em;\r\n\t    -webkit-margin-before: 0.67__qem;\r\n\t    -webkit-margin-after: 0.67em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\r\nstrong, b {\r\n    font-weight: bold;\r\n\t}\r\n\r\nh2 {\r\n\t    display: block;\r\n\t    font-size: 1.5em;\r\n\t    -webkit-margin-before: 0.83__qem;\r\n\t    -webkit-margin-after: 0.83em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th3 {\r\n\t    display: block;\r\n\t    font-size: 1.17em;\r\n\t    -webkit-margin-before: 1__qem;\r\n\t    -webkit-margin-after: 1em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th4 {\r\n\t    display: block;\r\n\t    -webkit-margin-before: 1.33__qem;\r\n\t    -webkit-margin-after: 1.33em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th5 {\r\n\t    display: block;\r\n\t    font-size: .83em;\r\n\t    -webkit-margin-before: 1.67__qem;\r\n\t    -webkit-margin-after: 1.67em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th6 {\r\n\t    display: block;\r\n\t    font-size: .67em;\r\n\t    -webkit-margin-before: 2.33__qem;\r\n\t    -webkit-margin-after: 2.33em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\r\n\r\n\/\/Lists\r\nul { \r\n   list-style-type: disc; \r\n   list-style-position: inside; \r\n}\r\nol { \r\n   list-style-type: decimal; \r\n   list-style-position: inside; \r\n}\r\nul ul, ol ul { \r\n   list-style-type: circle; \r\n   list-style-position: inside; \r\n   margin-left: 15px; \r\n}\r\nol ol, ul ol { \r\n   list-style-type: lower-latin; \r\n   list-style-position: inside; \r\n   margin-left: 15px; \r\n}\r\n\r\n\/\/Tables\r\ntable {\r\n\t    display: table;\r\n\t    border-collapse: separate;\r\n\t    border-spacing: 2px;\r\n\t    border-color: gray;\r\n\t}\r\n\t\r\n\tthead {\r\n\t    display: table-header-group;\r\n\t    vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttbody {\r\n\t    display: table-row-group;\r\n vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttfoot {\r\n\t    display: table-footer-group;\r\n\t    vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\t\/* for tables without table section elements (can happen with XHTML or dynamically created tables) *\/\r\n\ttable > tr {\r\n\t    vertical-align: middle;\r\n\t}\r\n\t\r\n\tcol {\r\n\t    display: table-column;\r\n}\r\n\t\r\n\tcolgroup {\r\n\t    display: table-column-group;\r\n\t}\r\n\t\r\n\ttr {\r\n\t    display: table-row;\r\n\t    vertical-align: inherit;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttd, th {\r\n\t    display: table-cell;\r\n\t    vertical-align: inherit;\r\n\t}\r\n\t\r\nth {\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\tcaption {\r\n\t    display: table-caption;\r\n\t    text-align: -webkit-center;\r\n\t}\r\n\r\n\/\/Button\r\nbutton {\r\n\t    -webkit-appearance: button;\r\n}<\/style>";
+
+//CSS for the tooltips associated with the "?" icons/buttons.
+
+var toolTipCss = '     <style>\r\n  .ui-tooltip {\r\n    display: inline-block;\r\n    background: #808080;\r\n    border: 2px solid white;\r\n  }\r\n  .ui-tooltip {\r\n    padding: 10px 20px;\r\n    color: white;\r\n    border-radius: 20px;\r\n    box-shadow: 0 0 7px black;\r\n  }\r\n\r\n.tg  {border-collapse:collapse;border-spacing:0;}\r\n.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}\r\n.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}\r\n.tg .tg-yw4l{vertical-align:top}\r\n\r\n \r\n  <\/style>\r\n';
+
+//CSS for "?" button, includes some animations, hover function definitions.
+
+var buttonCss = '<style>\r\n.button-hov {\r\n  display: inline-block;\r\n position: absolute;\r\n right: 20px; inline-block;\r\n  border-radius: 100%;\r\n  background-color: #808080;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  text-align: center;\r\n  font-size: 10px;\r\n  padding: 6px;\r\n  transition: all 0.5s;\r\n  cursor: pointer;\r\n  margin: 5px;\r\n}\r\n\r\n.button-hov span {\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  position: relative;\r\n  transition: 0.5s;\r\n}\r\n\r\n.button-hov span:after {\r\n  content: \'\u00BB\';\r\n  position: absolute;\r\n  opacity: 0;\r\n  top: 0;\r\n  right: 20px;\r\n  transition: 0.5s;\r\n}\r\n\r\n.button-hov:hover span {\r\n  padding-right: 25px;\r\n}\r\n\r\n.button-hov:hover span:after {\r\n  opacity: 1;\r\n  right: 0;\r\n}\r\n<\/style>';
+
+//CSS for table borders, used for "Validate 2"
+
+var tableCss = '<style type="text/css">.tg  {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg .tg-yw4l{vertical-align:top}</style>';
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//Buttons
+//Buttons have been defined in this section using jquery.
+
+// "Validate 1" button
 window._wfx_settings.add_button = function (name, button, parentSelector, action) {
     var validate_id = "wfx_" + name + "_validate";
     if (document.getElementById(validate_id)) {
@@ -96,7 +99,7 @@ window._wfx_settings.add_button = function (name, button, parentSelector, action
 };
 
 
-//New Button for Validation
+// "Validate 2" button
 window._wfx_settings.add_button_validate_two = function (name, button, parentSelector, action) {
     var validate_two_id = "wfx_" + name + "_validate_two";
     if (document.getElementById(validate_two_id)) {
@@ -116,10 +119,7 @@ window._wfx_settings.add_button_validate_two = function (name, button, parentSel
 };
 
 
-
-
-/*--------------------------------------------------------------------------------------*/
-// Report Status Button
+// "Report Status" Button/ "?" icon
 window._wfx_settings.add_button_report_status = function (name, button, parentSelector, action) {
     var report_status_id = "wfx_" + name + "_report_status";
     if (document.getElementById(report_status_id)) {
@@ -151,10 +151,8 @@ window._wfx_settings.add_button_report_status = function (name, button, parentSe
     $(parentSelector).append(report_status);
 };
 
-/*--------------------------------------------------------------------------------------*/
 
-/*--------------------------------------------------------------------------------------*/
-// Schedule Status Button
+// "Schedule Status" Button
 window._wfx_settings.add_button_schedule_status = function (name, button, parentSelector, action) {
     var schedule_status_id = "wfx_" + name + "_schedule_status";
     if (document.getElementById(schedule_status_id)) {
@@ -186,9 +184,7 @@ window._wfx_settings.add_button_schedule_status = function (name, button, parent
     $(parentSelector).append(schedule_status);
 };
 
-/*--------------------------------------------------------------------------------------*/
 
-/*--------------------------------------------------------------------------------------*/
 // Scope Status Button
 window._wfx_settings.add_button_scope_status = function (name, button, parentSelector, action) {
     var scope_status_id = "wfx_" + name + "_scope_status";
@@ -221,10 +217,8 @@ window._wfx_settings.add_button_scope_status = function (name, button, parentSel
     $(parentSelector).append(scope_status);
 };
 
-/*--------------------------------------------------------------------------------------*/
 
-/*--------------------------------------------------------------------------------------*/
-// Cost & Effort Button
+// "Cost & Effort" Button
 window._wfx_settings.add_button_ce_status = function (name, button, parentSelector, action) {
     var ce_status_id = "wfx_" + name + "_ce_status";
     if (document.getElementById(ce_status_id)) {
@@ -256,118 +250,7 @@ window._wfx_settings.add_button_ce_status = function (name, button, parentSelect
     $(parentSelector).append(ce_status);
 };
 
-/*--------------------------------------------------------------------------------------*/
-
-
-///*--------------------------------------------------------------------------------------*/
-// //Report Status Button
-//window._wfx_settings.add_button_report_status = function (name, button, parentSelector, action) {
-//    var report_status_id = "wfx_" + name + "_report_status";
-//    if (document.getElementById(report_status_id)) {
-//        return;
-//    }
-//    var test_field = $('<div/>', {
-//        text: "button"
-//        , class: 'wrapper'
-//        , click: action
-//        , id: report_status_id
-//    });
-//    $(parentSelector).append(report_status);
-//};
-//
-///*--------------------------------------------------------------------------------------*/
-
-
-
-
-/*--------------------------------------------------------------------------------------*/
-// Report Status Button
-//window._wfx_settings.add_button_report_status = function (name, button, parentSelector, action) {
-//    var report_status_id = "wfx_" + name + "_report_status";
-//    if (document.getElementById(report_status_id)) {
-//        return;
-//    }
-//    var report_status = $('<link rel=\"stylesheet\" href=\"https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/balloon-css\/0.3.0\/balloon.min.css\">\r\n\r\n<button data-balloon=\"HTML special characters: &#9787; &#9986; &#9820;\" data-balloon-pos=\"up\">Hover me!<\/button>');
-//    $(parentSelector).append(report_status);
-//};
-
-/*--------------------------------------------------------------------------------------*/
-
-
-
-
-
-//
-///*--------------------------------------------------------------------------------------*/
-//// Schedule Status Button
-//window._wfx_settings.add_button_schedule_status = function (name, button, parentSelector, action) {
-//    var schedule_status_id = "wfx_" + name + "_schedule_status";
-//    if (document.getElementById(schedule_status_id)) {
-//        return;
-//    }
-//    var schedule_status = $('<button/>', {
-//        text: button
-//        , class: 'ppm_button button'
-//        , css: {
-//            'background': '#ED9126'
-//            , 'color': 'white'
-//        }
-//        , click: action
-//        , id: schedule_status_id
-//    });
-//    $(parentSelector).append(schedule_status);
-//};
-//
-///*--------------------------------------------------------------------------------------*/
-//
-//
-///*--------------------------------------------------------------------------------------*/
-//// Cost & Effort Status Button
-//window._wfx_settings.add_button_ce = function (name, button, parentSelector, action) {
-//    var ce_status_id = "wfx_" + name + "_ce_status";
-//    if (document.getElementById(ce_status_id)) {
-//        return;
-//    }
-//    var ce_status = $('<button/>', {
-//        text: button
-//        , class: 'ppm_button button'
-//        , css: {
-//            'background': '#ED9126'
-//            , 'color': 'white'
-//        }
-//        , click: action
-//        , id: ce_status_id
-//    });
-//    $(parentSelector).append(ce_status);
-//};
-//
-///*--------------------------------------------------------------------------------------*/
-//
-//
-///*--------------------------------------------------------------------------------------*/
-//// Scope Status Button
-//window._wfx_settings.add_button_scope = function (name, button, parentSelector, action) {
-//    var scope_status_id = "wfx_" + name + "_scope_status";
-//    if (document.getElementById(scope_status_id)) {
-//        return;
-//    }
-//    var scope_status = $('<button/>', {
-//        text: button
-//        , class: 'ppm_button button'
-//        , css: {
-//            'background': '#ED9126'
-//            , 'color': 'white'
-//        }
-//        , click: action
-//        , id: scope_status_id
-//    });
-//    $(parentSelector).append(scope_status);
-//};
-//
-///*--------------------------------------------------------------------------------------*/
-
-
-
+//Not sure what this function does...
 window._wfx_settings.equals = function (one, two) {
     if (!one) {
         if (!two) {
@@ -384,54 +267,10 @@ window._wfx_settings.equals = function (one, two) {
     }
 };
 
-window._wfx_settings.init_page = function (name, settings) {
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//Message/Popup/Shoutout definitions --jquery
 
-    // Validate button addition.
-    if (settings.validate) {
-        window._wfx_settings.add_button(name, "Validate 1", settings.button_bar, settings.validate);
-    }
-
-    // Validate button addition.
-    if (settings.validate_two) {
-        window._wfx_settings.add_button_validate_two(name, "Validate 2", settings.button_bar, settings.validate_two);
-    }
-
-    //Report Status button addition.
-
-    window._wfx_settings.add_button_report_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Schedule+status.png" alt="Report Status Table" >', settings.button_bar_one);
-
-    //    
-    //    //Schedule Status button addition.
-    //    
-    window._wfx_settings.add_button_schedule_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Schedule+status.png" alt="Report Status Table" >', settings.button_bar_two);
-    //    //Scope Status button addition.
-
-    window._wfx_settings.add_button_scope_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Scope+Status.png" alt="Scope Status Table" >', settings.button_bar_three);
-    //    
-    //    //Cost & Effect Status button addition.
-
-    window._wfx_settings.add_button_ce_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Cost+and+Effort+status.png" alt="Cost & Effort Table" >', settings.button_bar_four);
-    //    
-    //
-    //    // Show Me How button addition.
-    //    if (settings.show_me) {
-    //        window._wfx_settings.add_button(name, "Show Me How", "td", function () {
-    //            window._wfx_flow = settings.show_me;
-    //            window._wfx_live && window._wfx_live();
-    //        });
-    //    }
-
-    // Update self help widget if required.
-    if (settings.self_help && (!window._wfx_settings.equals(settings.self_help.tags, window._wfx_widget.tags) || !window._wfx_settings.equals(settings.self_help.color, window._wfx_widget.color))) {
-        window._wfx_widget.tags = settings.self_help.tags;
-        window._wfx_widget.filter_by_tag = settings.self_help.tags;
-        window._wfx_widget.color = settings.self_help.color;
-        window._wfx_refresh();
-    }
-};
-
-
-//For General Messages...
+//General Messages
 window._wfx_settings.show_message = function (message, color) {
     var bgWrap = $('<div/>', {
         css: {
@@ -569,7 +408,64 @@ window._wfx_settings.shoutout = function (message, color) {
         bgWrap.remove()
     });
 };
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+//Invokes functions to add buttons to pages
+
+window._wfx_settings.init_page = function (name, settings) {
+
+    // Validate button addition.
+
+    if (settings.validate) {
+        window._wfx_settings.add_button(name, "Validate 1", settings.button_bar, settings.validate);
+    }
+
+    // Validate button addition.
+
+    if (settings.validate_two) {
+        window._wfx_settings.add_button_validate_two(name, "Validate 2", settings.button_bar, settings.validate_two);
+    }
+
+    //Report Status button addition.
+
+    window._wfx_settings.add_button_report_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Schedule+status.png" alt="Report Status Table" >', settings.button_bar_one);
+
+    //Schedule Status button addition.
+
+    window._wfx_settings.add_button_schedule_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Schedule+status.png" alt="Report Status Table" >', settings.button_bar_two);
+
+    //Scope Status button addition.
+
+    window._wfx_settings.add_button_scope_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Scope+Status.png" alt="Scope Status Table" >', settings.button_bar_three);
+
+    //Cost & Effect Status button addition.
+
+    window._wfx_settings.add_button_ce_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Cost+and+Effort+status.png" alt="Cost & Effort Table" >', settings.button_bar_four);
+    //    
+    //
+    //    // Show Me How button addition.
+    //    if (settings.show_me) {
+    //        window._wfx_settings.add_button(name, "Show Me How", "td", function () {
+    //            window._wfx_flow = settings.show_me;
+    //            window._wfx_live && window._wfx_live();
+    //        });
+    //    }
+
+    // Update self help widget if required.
+    if (settings.self_help && (!window._wfx_settings.equals(settings.self_help.tags, window._wfx_widget.tags) || !window._wfx_settings.equals(settings.self_help.color, window._wfx_widget.color))) {
+        window._wfx_widget.tags = settings.self_help.tags;
+        window._wfx_widget.filter_by_tag = settings.self_help.tags;
+        window._wfx_widget.color = settings.self_help.color;
+        window._wfx_refresh();
+    }
+};
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 // Page specific settings
 window._wfx_settings.apply_page_settings = function () {
     var self_help_applied;
@@ -657,7 +553,10 @@ window._wfx_settings['page_settings']['create_timesheet'] = {
     "show_me": "7667a890-49b2-11e6-aba8-448a5b5dd5b8" // Flow to trigger
 };
 
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 //
 // Status report flow.
 //
@@ -666,13 +565,10 @@ window._wfx_settings['page_settings']['create_timesheet'] = {
 window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function (event) {
     var potential_step;
 
-    //    //Shoutout-- Tied to landing page URI
+    //    //Shoutout-- Tied to landing page URI -- Uncomment for shoutout on landing page
     //    if(document.documentURI == 'http://ppmcontent.excers.com/niku/nu#action:npt.overview' && event.step!=1){
     //        window._wfx_settings.shoutout("<h1>SHOUTOUT</h1>",'red');
     //    }
-
-
-
 
     ////Highlight Mouse over feature
 
@@ -705,18 +601,9 @@ window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function (event) 
     }
 };
 
+//Validate 1 button click action
 var status_report_validate = function () {
 
-    var title = "<h3>Status Report Validation Results</h3>";
-    var business_positive_message = "<strong>Form conforms to PMO standards</strong><br>";
-    var business_negative_message = "<strong>Action required to conform with PMO Standards</strong><br></br>";
-    var message = '<style type="text/css">.tg  {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg .tg-yw4l{vertical-align:top}</style>';
-
-    var no_page_errors = 10;
-    var no_page_validations = 10; //Should total the number of validations performed.
-    var display_no_errors = 0.0;
-    var invalid = false;
-    //For name field validation
     var str = document.querySelector('[maxlength="80"]').value;
     var date_regex = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
     var res = date_regex.test(str.substring(14)) && str.includes('Week Ending');
@@ -836,12 +723,14 @@ var status_report_validate = function () {
 
 }
 
+
+//Validate 2 button click action
 var status_report_validate_two = function () {
 
     var title = "<h3>Status Report Validation Results</h3>";
     var business_positive_message = "<strong>Form conforms to PMO standards</strong><br>";
     var business_negative_message = "<strong>Action required to conform with PMO Standards</strong><br></br>";
-    var message = '<style type="text/css">.tg  {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg .tg-yw4l{vertical-align:top}</style>';
+    var message = tableCss;
 
     var no_page_errors = 10;
     var no_page_validations = 10; //Should total the number of validations performed.
@@ -913,12 +802,11 @@ var status_report_validate_two = function () {
     }
 }
 
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//Controlling where the buttons appear, filtered by url hash.
 
-
-
-
-/*----------------------------------------------------------------------------*/
 // Validate one button for New status report.
 window._wfx_settings['page_settings']['create_status_report'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -935,9 +823,6 @@ window._wfx_settings['page_settings']['update_status_report'] = {
 };
 
 
-/*----------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------*/
 // Validate one button for New status report.
 window._wfx_settings['page_settings']['create_status_report_two'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -954,9 +839,6 @@ window._wfx_settings['page_settings']['update_status_report_two'] = {
 };
 
 
-/*----------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------*/
 // Report Status button for New Status Report.
 window._wfx_settings['page_settings']['report_status_one'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -968,10 +850,8 @@ window._wfx_settings['page_settings']['report_status_two'] = {
     "hash": "#action:odf.cop_prj_statusrptProperties"
     , "button_bar_one": "[title = 'Status Report']"
 };
-/*----------------------------------------------------------------------------*/
 
 
-/*----------------------------------------------------------------------------*/
 // Schedule Status button for New Status Report.
 window._wfx_settings['page_settings']['schedule_status_one'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -985,10 +865,8 @@ window._wfx_settings['page_settings']['schedule_status_two'] = {
     , "button_bar_two": "[title = 'Schedule']"
 
 };
-/*----------------------------------------------------------------------------*/
 
 
-/*----------------------------------------------------------------------------*/
 // Scope Status button for New Status Report.
 window._wfx_settings['page_settings']['scope_status_one'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -996,16 +874,15 @@ window._wfx_settings['page_settings']['scope_status_one'] = {
 
 };
 
+
 // Scope Status button for Existing Status Report.
 window._wfx_settings['page_settings']['scope_status_two'] = {
     "hash": "#action:odf.cop_prj_statusrptProperties"
     , "button_bar_three": "[title = 'Scope']"
 
 };
-/*----------------------------------------------------------------------------*/
 
 
-/*----------------------------------------------------------------------------*/
 // Cost & Effort Status button for New Status Report.
 window._wfx_settings['page_settings']['cost_and_effort_status_one'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -1019,4 +896,11 @@ window._wfx_settings['page_settings']['cost_and_effort_status_two'] = {
     , "button_bar_four": "[title = 'Cost and Effort']"
 
 };
-/*----------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//Additional Comments...
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//END//
+/*----------------------------------------------------------------------------------------------------------------------------------*/
