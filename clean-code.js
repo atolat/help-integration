@@ -1,6 +1,8 @@
 /*------------------------------------------------------------------------------------------------------------------------------------/
                                         ##Integration Script for "Help" by Excers.## 
     >>This script is developed for CAPPM's training instance for demonstration of the tool, using the "Create a Status Report Flow".
+    >>Git Repository:: https://github.com/atolat/help-integration.git
+    >>Ver 1.0-alpha
 */
 
 
