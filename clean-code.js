@@ -9,6 +9,31 @@
 /*----------------------------------------------------------------------------------------------------------------------------------*/
 // Initial Configurations
 
+
+//A neat function to read data from a url/s3 bucket using jquery .get()
+//Application to match dates for periodic shoutouts!!
+//Asynchrony Rocks!!
+
+$(document).ready(function () {
+    var d = new Date();
+    var n = d.getDate(); //This will display the month
+    // alert(n);  
+    var period = '';
+    $.get("https://s3.amazonaws.com/excers-help/demodoc.txt", function (data, status) {
+        period = data.search('Quarterly');
+        if (period != -1) {
+            if (n == 1 || n == 4 || n == 8 || n == 12) {
+                window._wfx_settings.shoutout("HEY!!", "red");
+            }
+        }
+    });
+
+});
+
+
+
+
+
 // Whatfix setting change to let the tip come over menu.
 window._wfx_settings.z_refresh = true;
 
@@ -66,11 +91,11 @@ var normalizeCSS = "<style>\/\/Strong\r\nb\r\n, strong {\r\n    font - weight: i
 
 //CSS for the tooltips associated with the "?" icons/buttons.
 
-var toolTipCss = '     <style>\r\n  .ui-tooltip {\r\n    display: inline-block;\r\n    background: #808080;\r\n    border: 2px solid white;\r\n  }\r\n  .ui-tooltip {\r\n    padding: 10px 20px;\r\n    color: white;\r\n    border-radius: 20px;\r\n    box-shadow: 0 0 7px black;\r\n  }\r\n\r\n.tg  {border-collapse:collapse;border-spacing:0;}\r\n.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}\r\n.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}\r\n.tg .tg-yw4l{vertical-align:top}\r\n\r\n \r\n  <\/style>\r\n';
+var toolTipCss = '     <style>\r\n  .ui-tooltip {\r\n    display: inline-block;\r\n    background: #808080;\r\n    border: 2px solid white;\r\n  }\r\n  .ui-tooltip {\r\n    padding: 10px 20px;\r\n    color: white;\r\n    border-radius: 20px;\r\n    box-shadow: 0 0 7px black;<\/style>';
 
 //CSS for "?" button, includes some animations, hover function definitions.
 
-var buttonCss = '<style>\r\n.button-hov {\r\n  display: inline-block;\r\n position: absolute;\r\n right: 20px; inline-block;\r\n  border-radius: 100%;\r\n  background-color: #808080;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  text-align: center;\r\n  font-size: 10px;\r\n  padding: 6px;\r\n  transition: all 0.5s;\r\n  cursor: pointer;\r\n  margin: 5px;\r\n}\r\n\r\n.button-hov span {\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  position: relative;\r\n  transition: 0.5s;\r\n}\r\n\r\n.button-hov span:after {\r\n  content: \'\u00BB\';\r\n  position: absolute;\r\n  opacity: 0;\r\n  top: 0;\r\n  right: 20px;\r\n  transition: 0.5s;\r\n}\r\n\r\n.button-hov:hover span {\r\n  padding-right: 25px;\r\n}\r\n\r\n.button-hov:hover span:after {\r\n  opacity: 1;\r\n  right: 0;\r\n}\r\n<\/style>';
+var buttonCss = '<style>\r\n.button-hov {\r\n  display: inline-block;\r\n position: absolute;\r\n right: 20px; inline-block;\r\n  border-radius: 100%;\r\n  background-color: #808080;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  text-align: center;\r\n  font-size: 10px;\r\n  padding: 6px;\r\n  cursor: pointer;\r\n  margin: 5px;\r\n}\r\n<\/style>';
 
 //CSS for table borders, used for "Validate 2"
 
@@ -88,7 +113,7 @@ window._wfx_settings.add_button = function (name, button, parentSelector, action
         return;
     }
     var validate = $('<button/>', {
-        text: button
+        html: button
         , class: 'ppm_button button'
         , css: {
             'background': '#ED9126'
@@ -329,6 +354,68 @@ window._wfx_settings.show_message = function (message, color) {
 
 };
 
+//Resources...
+window._wfx_settings.show_resource = function (message, color, width, height) {
+    //    var bgWrap = $('<div/>', {
+    //        css: {
+    //            'display': 'block'
+    //            , 'position': 'relative'
+    //            , 'width': '100%'
+    //            , 'height': '100%'
+    //            , 'left': '0'
+    //            , 'top': '0'
+    //            , 'background': '#000'
+    //            , 'opacity': '0.7'
+    //            , 'filter': 'alpha(opacity=70)'
+    //            , 'z-index': '100000'
+    //        }
+    //    });
+
+    var bgWrap = $('<div/>', {
+        css: {
+            'display': 'block'
+            , 'position': 'relative'
+                //    , 'top': '50%'
+                //  , 'left': '50%'
+                // , 'transform': 'translate(-50%,-50%)'
+                
+            , 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
+            , 'background': '#808080'
+            , 'width': width
+            , 'height': height
+            , 'padding': '20px 20px 50px 20px'
+            , 'border-radius': '4px'
+            , 'z-index': '100001'
+            , 'margin': '10% auto'
+            , 'align-items': 'center'
+        }
+    });
+    var text = $('<label/>', {
+        css: {
+            'color': color
+        }
+        , html: '<center>' + message + '</center>'
+    });
+    var close = $('<button/>', {
+        class: 'ppm_button button'
+        , css: {
+            'float': 'right'
+            , 'margin': '10px'
+        }
+        , text: 'Close'
+        , click: function () {
+            bgWrap.remove();
+            // popup.remove();
+        }
+    });
+    bgWrap.append(text);
+    bgWrap.append(close);
+    $('body').append(bgWrap);
+    //$('body').append(popup);
+
+
+};
+
 //High light features for Demo.
 window._wfx_settings.show_feature = function (message, color) {
 
@@ -421,7 +508,7 @@ window._wfx_settings.init_page = function (name, settings) {
     // Validate button addition.
 
     if (settings.validate) {
-        window._wfx_settings.add_button(name, "Validate 1", settings.button_bar, settings.validate);
+        window._wfx_settings.add_button(name, "&#9888;Validate 1", settings.button_bar, settings.validate);
     }
 
     // Validate button addition.
@@ -595,13 +682,64 @@ window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function (event) 
     if (window.location.hash.startsWith("#action:odf.cop_prj_statusrptProperties&parent_odf_view=projectCreate.subObjList.cop_prj_statusrpt")) {
         potential_step = 6;
     }
-    //window.alert(potential_step);
+
     if (potential_step && event.step < potential_step) {
         return {
             "position": potential_step
         };
     }
 };
+
+// Resources!!!
+//PDF
+window._wfx_settings['976d9890-55c1-11e6-9ece-448a5b5dd1ba'] = function (event) {
+    var potential_step;
+
+    //Tied to landing page URI 
+    if (document.documentURI.startsWith('http://ppmcontent.excers.com/')) {
+        window._wfx_settings.show_resource('<embed src="https://www.thecssninja.com/demo/gmail_dragout/html5-cheat-sheet.pdf" width="600" height="800" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">', 'red', '600px', '800px');
+    }
+};
+
+//Video
+window._wfx_settings['fb9bf450-55cc-11e6-86b3-448a5b5dd5b8'] = function (event) {
+    var potential_step;
+
+    //Tied to landing page URI
+    if (document.documentURI.startsWith('http://ppmcontent.excers.com/')) {
+        window._wfx_settings.show_resource('<iframe width="420" height="315"src="https://www.youtube.com/embed/qUzeyk4Upsg"></iframe>', 'red', '420px', '315px');
+    }
+};
+
+
+// Handling of Status report workflow to launch from the middle.
+//window._wfx_settings = {
+//        "onBeforeShow" : function (event) {
+//
+//            //window.alert(potential_step);
+//            if ((event.flow_id==="f863e870-42c0-11e6-8bdf-448a5b5dd1ba") && (document.getElementsByTagName('warn').offsetHeight==0)) {
+//                return {"position":6};
+//            } else {
+//                return null;
+//            }
+//        }
+//};
+
+//window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba']= {
+//        "onBeforeShow": function (event) {
+//                if(event.flow_id==="f863e870-42c0-11e6-8bdf-448a5b5dd1ba" && event.step==9 && (document.getElementsByTagName('warn').length==1))
+//                    return {"flow_id":"f863e870-42c0-11e6-8bdf-448a5b5dd1ba", "position":6};
+//                else
+//                    return null;
+//        },
+//        "onBeforeEnd": function (event) {
+//                if(event.flow_id==="f863e870-42c0-11e6-8bdf-448a5b5dd1ba" && (document.getElementsByTagName('warn').length==1))
+//                    return {"flow_id":"f863e870-42c0-11e6-8bdf-448a5b5dd1ba", "position":6};
+//                else
+//                    return null;
+//        }
+//};
+
 
 //Validate 1 button click action
 var status_report_validate = function () {
@@ -611,14 +749,14 @@ var status_report_validate = function () {
     var res = date_regex.test(str.substring(14)) && str.includes('Week Ending');
     var valtip = $("<warn/>", {
         'class': 'tooltips'
-        , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>This will be really cool if it works!!</msg>'
-    }).append('<style>\r\nwarn.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  height: 30px;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+        , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Enter Report Name in Correct Format: "Week Ending - MM/DD/YYYY"</msg>'
+    }).append('<style>\r\nwarn.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
     var repname = $('[maxlength="80"]');
 
     if (res == false) {
         $('tick').remove();
         if (!($('warn').length)) {
-            repname = repname.addClass('animation').append('<style>\r\n.animation{\r\n  animation: .5s animateBorderOne ease infinite;\r\n}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n    outline-color: red;\r\n    box-shadow: 0 0 0 2px red;\r\n  }\r\n}<\/style>');
+            repname = repname.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 1s animateBorderOne ease 5;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
             repname = repname.after(valtip);
         }
 
@@ -805,6 +943,7 @@ var status_report_validate_two = function () {
 }
 
 /*----------------------------------------------------------------------------------------------------------------------------------*/
+
 
 /*----------------------------------------------------------------------------------------------------------------------------------*/
 //Controlling where the buttons appear, filtered by url hash.
