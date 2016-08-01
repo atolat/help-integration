@@ -13,21 +13,43 @@
 //A neat function to read data from a url/s3 bucket using jquery .get()
 //Application to match dates for periodic shoutouts!!
 //Asynchrony Rocks!!
+function urlify(text) {
+    var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.match(urlRegex);
+};
+
+function getPeriod(text) {
+    if (/Quarterly/i.test(text)) {
+        return "Quarterly";
+    } else if (/Monthly/i.test(text)) {
+        return "Monthly";
+    } else if (/Daily/i.test(text)) {
+        return "Daily";
+    } else {
+        return null;
+    }
+}; //.....The list can go on, to the millisecond!!!
+
 
 $(document).ready(function () {
+    //For a monthly shoutout...
     var d = new Date();
-    var n = d.getDate(); //This will display the month
-    // alert(n);  
+    var n = d.getDate(); //This will display the date-DD  
     var period = '';
     $.get("https://s3.amazonaws.com/excers-help/demodoc.txt", function (data, status) {
-        period = data.search('Quarterly');
-        if (period != -1) {
-            if (n == 1 || n == 4 || n == 8 || n == 12) {
-                window._wfx_settings.shoutout("HEY!!", "red");
-            }
-        }
-    });
+        if (getPeriod(data)) { //null check
+            if (getPeriod(data) == 'Monthly') { //period check
+                if (n == 1 || n == 2 || n == 3 || n == 4 || n == 5 || n == 6 || n == 7 || n == 8 || n == 9 || n == 10 || n == 11 || n == 12) {
+                    var urlOne = urlify(data);
+                    window._wfx_settings.show_resource('<img src=' + '"' + urlOne + '">', "red");
+                }
 
+
+            }
+
+        }
+
+    });
 });
 
 
@@ -378,7 +400,11 @@ window._wfx_settings.show_resource = function (message, color, width, height) {
                 //    , 'top': '50%'
                 //  , 'left': '50%'
                 // , 'transform': 'translate(-50%,-50%)'
-                
+
+
+
+
+            
             , 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
             , 'background': '#808080'
             , 'width': width
