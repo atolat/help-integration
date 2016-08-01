@@ -12,7 +12,7 @@
 
 //A neat function to read data from a url/s3 bucket using jquery .get()
 //Application to match dates for periodic shoutouts!!
-//Asynchrony Rocks!!
+
 function urlify(text) {
     var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
     return text.match(urlRegex);
@@ -30,6 +30,28 @@ function getPeriod(text) {
     }
 }; //.....The list can go on, to the millisecond!!!
 
+//
+//$(document).ready(function () {
+//    //For a monthly shoutout...
+//    var d = new Date();
+//    var n = d.getDate(); //This will display the date-DD  
+//    var period = '';
+//    $.get("https://s3.amazonaws.com/excers-help/demodoc.txt", function (data, status) {
+//        if (getPeriod(data)) { //null check
+//            if (getPeriod(data) == 'Monthly') { //period check
+//                if (n == 1 || n == 2 || n == 3 || n == 4 || n == 5 || n == 6 || n == 7 || n == 8 || n == 9 || n == 10 || n == 11 || n == 12) {
+//                    var urlOne = urlify(data);
+//                    window._wfx_settings.show_resource('<img src=' + '"' + urlOne + '">', "red");
+//                }
+//
+//
+//            }
+//
+//        }
+//
+//    });
+//});
+
 
 $(document).ready(function () {
     //For a monthly shoutout...
@@ -37,17 +59,13 @@ $(document).ready(function () {
     var n = d.getDate(); //This will display the date-DD  
     var period = '';
     $.get("https://s3.amazonaws.com/excers-help/demodoc.txt", function (data, status) {
-        if (getPeriod(data)) { //null check
-            if (getPeriod(data) == 'Monthly') { //period check
-                if (n == 1 || n == 2 || n == 3 || n == 4 || n == 5 || n == 6 || n == 7 || n == 8 || n == 9 || n == 10 || n == 11 || n == 12) {
-                    var urlOne = urlify(data);
-                    window._wfx_settings.show_resource('<img src=' + '"' + urlOne + '">', "red");
-                }
+        var clientObj = JSON.parse(data);
+        window.shoutout_url = clientObj.img_urls.shoutout;
+        window.tooltip1_url = clientObj.img_urls.tooltip1;
+        window.tooltip2_url = clientObj.img_urls.tooltip2;
+        window.tooltip3_url = clientObj.img_urls.tooltip3;
 
-
-            }
-
-        }
+      
 
     });
 });
@@ -113,7 +131,7 @@ var normalizeCSS = "<style>\/\/Strong\r\nb\r\n, strong {\r\n    font - weight: i
 
 //CSS for the tooltips associated with the "?" icons/buttons.
 
-var toolTipCss = '     <style>\r\n  .ui-tooltip {\r\n    display: inline-block;\r\n    background: #808080;\r\n    border: 2px solid white;\r\n  }\r\n  .ui-tooltip {\r\n    padding: 10px 20px;\r\n    color: white;\r\n    border-radius: 20px;\r\n    box-shadow: 0 0 7px black;<\/style>';
+var toolTipCss = '<style>\r\n  .ui-tooltip {\r\n    display: inline-block;\r\n    background: #808080;\r\n    border: 2px solid white;\r\n  padding: 10px 20px;\r\n    color: white;\r\n    border-radius: 20px;\r\n    box-shadow: 0 0 7px black;}<\/style>';
 
 //CSS for "?" button, includes some animations, hover function definitions.
 
@@ -404,6 +422,7 @@ window._wfx_settings.show_resource = function (message, color, width, height) {
 
 
 
+
             
             , 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
             , 'background': '#808080'
@@ -545,19 +564,19 @@ window._wfx_settings.init_page = function (name, settings) {
 
     //Report Status button addition.
 
-    window._wfx_settings.add_button_report_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Schedule+status.png" alt="Report Status Table" >', settings.button_bar_one);
+    window._wfx_settings.add_button_report_status(name, '<img src=' + '"' + window.shoutout_url + '">', settings.button_bar_one);
 
     //Schedule Status button addition.
 
-    window._wfx_settings.add_button_schedule_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Schedule+status.png" alt="Report Status Table" >', settings.button_bar_two);
+    window._wfx_settings.add_button_schedule_status(name,  '<img src=' + '"' + window.tooltip1_url + '">', settings.button_bar_two);
 
     //Scope Status button addition.
 
-    window._wfx_settings.add_button_scope_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Scope+Status.png" alt="Scope Status Table" >', settings.button_bar_three);
+    window._wfx_settings.add_button_scope_status(name, '<img src=' + '"' + window.tooltip2_url + '">', settings.button_bar_three);
 
     //Cost & Effect Status button addition.
 
-    window._wfx_settings.add_button_ce_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Cost+and+Effort+status.png" alt="Cost & Effort Table" >', settings.button_bar_four);
+    window._wfx_settings.add_button_ce_status(name, '<img src=' + '"' + window.tooltip3_url + '">', settings.button_bar_four);
     //    
     //
     //    // Show Me How button addition.
