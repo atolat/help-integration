@@ -65,13 +65,25 @@ $(document).ready(function () {
         window.tooltip2_url = clientObj.img_urls.tooltip2;
         window.tooltip3_url = clientObj.img_urls.tooltip3;
 
-      
+
 
     });
 });
 
 
+//Page Sleep
+var bool = true;
+$(document).ready(function () {
+    bool = true;
+    setInterval(function () {
+        if (bool == true) {
+            window._wfx_flow = 'f863e870-42c0-11e6-8bdf-448a5b5dd1ba';
+            window._wfx_live && window._wfx_live();
+            bool = false;
+        }
+    }, 10000);
 
+});
 
 
 // Whatfix setting change to let the tip come over menu.
@@ -102,21 +114,7 @@ window._wfx_settings['default_page_settings'] = {
     "self_help": {}
 };
 
-//Uncomment to change widget colors --Experimantal, might break CSS.
-//window._wfx_settings= { "theme":{
-//    "color1":"#2b3f57",
-//    "color2":"#3458a2",
-//    "color3":"#f4f4f4",
-//    "color5":"#2b3f57",
-//    "font":"verdana",
-//    "font_size": "14px",
-//    "line_height":"20px",
-//    "title_size":"16px",
-//    "foot_size":"12px",
-//    "widget_size":"14px",
-//    "font_css":"https://fonts.googleapis.com/css?family=Roboto|Oswald",
-//    "note_style":"italic",
-//}};
+
 /*----------------------------------------------------------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------------------------------------------------------*/
@@ -396,34 +394,25 @@ window._wfx_settings.show_message = function (message, color) {
 
 //Resources...
 window._wfx_settings.show_resource = function (message, color, width, height) {
-    //    var bgWrap = $('<div/>', {
-    //        css: {
-    //            'display': 'block'
-    //            , 'position': 'relative'
-    //            , 'width': '100%'
-    //            , 'height': '100%'
-    //            , 'left': '0'
-    //            , 'top': '0'
-    //            , 'background': '#000'
-    //            , 'opacity': '0.7'
-    //            , 'filter': 'alpha(opacity=70)'
-    //            , 'z-index': '100000'
-    //        }
-    //    });
+    var bgWrapper = $('<div/>', {
+        css: {
+            'display': 'block'
+            , 'position': 'relative'
+            , 'width': '100%'
+            , 'height': '100%'
+            , 'left': '0'
+            , 'top': '0'
+            , 'background': '#000'
+            , 'opacity': '0.7'
+            , 'filter': 'alpha(opacity=70)'
+            , 'z-index': '100000'
+        }
+    });
 
     var bgWrap = $('<div/>', {
         css: {
             'display': 'block'
             , 'position': 'relative'
-                //    , 'top': '50%'
-                //  , 'left': '50%'
-                // , 'transform': 'translate(-50%,-50%)'
-
-
-
-
-
-            
             , 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
             , 'background': '#808080'
             , 'width': width
@@ -450,13 +439,13 @@ window._wfx_settings.show_resource = function (message, color, width, height) {
         , text: 'Close'
         , click: function () {
             bgWrap.remove();
-            // popup.remove();
+            bgWrapper.remove();
         }
     });
     bgWrap.append(text);
     bgWrap.append(close);
     $('body').append(bgWrap);
-    //$('body').append(popup);
+    $('body').append(bgWrapper);
 
 
 };
@@ -568,7 +557,7 @@ window._wfx_settings.init_page = function (name, settings) {
 
     //Schedule Status button addition.
 
-    window._wfx_settings.add_button_schedule_status(name,  '<img src=' + '"' + window.tooltip1_url + '">', settings.button_bar_two);
+    window._wfx_settings.add_button_schedule_status(name, '<img src=' + '"' + window.tooltip1_url + '">', settings.button_bar_two);
 
     //Scope Status button addition.
 

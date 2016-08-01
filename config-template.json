@@ -1,0 +1,23 @@
+{
+    "shoutouts": {
+        "content_url": "",
+        "period": ""
+    },
+    "tooltips": {
+        "tooltip1_url":"",
+        "tooltip2_url":"",
+        "tooltip3_url":"",
+        "tooltip4_url":""
+    },
+    "resources": {
+        "pdf":{
+            "pdf1_url":"",
+            "pdf2_url":""
+        },
+        "video":{
+            "video1_url":"",
+            "video2_url":""
+        }
+    },
+    "page_sleep":""
+}
