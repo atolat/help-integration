@@ -175,7 +175,7 @@ window._wfx_settings.add_button_validate_two = function (name, button, parentSel
         return;
     }
     var validate_two = $('<button/>', {
-        html: button
+        html: button 
         , class: 'ppm_button button'
         , css: {
             'background': '#ED9126'
@@ -681,24 +681,25 @@ var status_report_validate = function () {
 
 
     if (res == false) {
-        $('tick').remove();
+        $('tick1').remove();
         if (!($('warn1').length)) {
-            repname = repname.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 1s animateBorderOne ease 5;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            repname = repname.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
             repname = repname.after(valtip_one);
         }
 
     } else {
         $('warn1').remove();
         repname = repname.removeClass("animation");
-        if (!($('tick').length)) {
-            repname.after('<tick>&nbsp;&nbsp;&nbsp;&#10004</tick>');
+        if (!($('tick1').length)) {
+            repname = repname.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            repname.after('<tick1>&nbsp;&nbsp;&nbsp;&#10004</tick1>');
         }
 
     }
 
 
     if ((document.querySelector('[name="cop_schedule_status"]').selectedIndex == 0)) {
-        $('tick').remove();
+        $('tick2').remove();
         if (!($('warn2').length)) {
             schedule_status = schedule_status.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 1s animateBorderOne ease 5;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
             schedule_status = schedule_status.after(valtip_two);
@@ -706,13 +707,14 @@ var status_report_validate = function () {
     } else {
         $('warn2').remove();
         schedule_status = schedule_status.removeClass("animation");
-        if (!($('tick').length)) {
-            schedule_status.after('<tick>&nbsp;&nbsp;&nbsp;&#10004</tick>');
+        if (!($('tick2').length)) {
+            schedule_status = schedule_status.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            schedule_status.after('<tick2>&nbsp;&nbsp;&nbsp;&#10004</tick2>');
         }
     }
 
     if ((document.querySelector('[name="cop_schedule_status"]').selectedIndex != 1) && document.querySelector('[name="cop_schedule_exp"]').value.length == 0) {
-        $('tick').remove();
+        $('tick3').remove();
         if (!($('warn3').length)) {
             schedule_exp = schedule_exp.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 1s animateBorderOne ease 5;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
             schedule_exp = schedule_exp.after(valtip_three);
@@ -720,14 +722,15 @@ var status_report_validate = function () {
     } else {
        $('warn3').remove();
         schedule_exp = schedule_exp.removeClass("animation");
-        if (!($('tick').length)) {
-            schedule_exp.after('<tick>&nbsp;&nbsp;&nbsp;&#10004</tick>');
+        if (!($('tick3').length)) {
+            schedule_exp = schedule_exp.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            schedule_exp.after('<tick3>&nbsp;&nbsp;&nbsp;&#10004</tick3>');
         }
     }
 
 
     if ((document.querySelector('[name="cop_scope_status"]').selectedIndex == 0)) {
-        $('tick').remove();
+        $('tick4').remove();
         if (!($('warn4').length)) {
             scope_status = scope_status.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 1s animateBorderOne ease 5;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
             scope_status = scope_status.after(valtip_four);
@@ -736,14 +739,15 @@ var status_report_validate = function () {
     } else {
         $('warn4').remove();
         scope_status = scope_status.removeClass("animation");
-        if (!($('tick').length)) {
-            scope_status.after('<tick>&nbsp;&nbsp;&nbsp;&#10004</tick>');
+        if (!($('tick4').length)) {
+            scope_status = scope_status.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            scope_status.after('<tick4>&nbsp;&nbsp;&nbsp;&#10004</tick4>');
         }
     }
 
 
     if ((document.querySelector('[name="cop_scope_status"]').selectedIndex != 1) && document.querySelector('[name="cop_scope_exp"]').value.length == 0) {
-        $('tick').remove();
+        $('tick5').remove();
         if (!($('warn5').length)) {
             scope_exp = scope_exp.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 1s animateBorderOne ease 5;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
             scope_exp = scope_exp.after(valtip_five);
@@ -751,13 +755,14 @@ var status_report_validate = function () {
     } else {
         $('warn5').remove();
         scope_exp = scope_exp.removeClass("animation");
-        if (!($('tick').length)) {
-            scope_exp.after('<tick>&nbsp;&nbsp;&nbsp;&#10004</tick>');
+        if (!($('tick5').length)) {
+            scope_exp = scope_exp.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            scope_exp.after('<tick5>&nbsp;&nbsp;&nbsp;&#10004</tick5>');
         }
     }
 
     if ((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex == 0)) {
-        $('tick').remove();
+        $('tick6').remove();
         if (!($('warn6').length)) {
             costeffort_status = costeffort_status.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 1s animateBorderOne ease 5;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
             costeffort_status = costeffort_status.after(valtip_six);
@@ -765,15 +770,16 @@ var status_report_validate = function () {
 
     } else {
         $('warn6').remove();
-        costeffort_exp = costeffort_exp.removeClass("animation");
-        if (!($('tick').length)) {
-            costeffort_exp.after('<tick>&nbsp;&nbsp;&nbsp;&#10004</tick>');
+        costeffort_status = costeffort_status.removeClass("animation");
+        if (!($('tick6').length)) {
+            costeffort_status = costeffort_status.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            costeffort_status.after('<tick6>&nbsp;&nbsp;&nbsp;&#10004</tick6>');
         }
     }
 
 
     if ((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex != 1) && document.querySelector('[name="cop_effort_exp"]').value.length == 0) {
-         $('tick').remove();
+         $('tick7').remove();
         if (!($('warn7').length)) {
             costeffort_exp = costeffort_exp.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 1s animateBorderOne ease 5;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
             costeffort_exp = costeffort_exp.after(valtip_seven);
@@ -782,8 +788,9 @@ var status_report_validate = function () {
     } else {
         $('warn7').remove();
         costeffort_exp = costeffort_exp.removeClass("animation");
-        if (!($('tick').length)) {
-            costeffort_exp.after('<tick>&nbsp;&nbsp;&nbsp;&#10004</tick>');
+        if (!($('tick7').length)) {
+            costeffort_exp = costeffort_exp.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            costeffort_exp.after('<tick7>&nbsp;&nbsp;&nbsp;&#10004</tick7>');
         }
     }
 
