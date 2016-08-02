@@ -235,8 +235,9 @@ window._wfx_settings.add_button_schedule_status = function (name, button, parent
             return $(this).prop('title');
         }
         , position: {
-            my: "left+40 top-20"
-            , at: "center top"
+            my: "right center"
+            , at: "left center"
+            , collision:"fitflip fitflip"
             , using: function (position, feedback) {
                 $(this).css(position);
                 $("<div>")
