@@ -1,10 +1,93 @@
+/*------------------------------------------------------------------------------------------------------------------------------------/
+                                        ##Integration Script for "Help" by Excers.## 
+    >>Description: This script is developed for CAPPM's training instance for demonstration of the tool, using the "Create a Status Report Flow".
+    >>Git Repository:: https://github.com/atolat/help-integration.git
+    >>Ver 1.0
+    >>Author: Arpan Tolat
+*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+// Initial Configurations
+
+
+//A neat function to read data from a url/s3 bucket using jquery .get()
+//Application to match dates for periodic shoutouts!!
+
+function urlify(text) {
+    var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.match(urlRegex);
+};
+
+function getPeriod(text) {
+    if (/Quarterly/i.test(text)) {
+        return "Quarterly";
+    } else if (/Monthly/i.test(text)) {
+        return "Monthly";
+    } else if (/Daily/i.test(text)) {
+        return "Daily";
+    } else {
+        return null;
+    }
+}; //.....The list can go on, to the millisecond!!!
+
 //
-// Base Whatfix configuration.
+//$(document).ready(function () {
+//    //For a monthly shoutout...
+//    var d = new Date();
+//    var n = d.getDate(); //This will display the date-DD  
+//    var period = '';
+//    $.get("https://s3.amazonaws.com/excers-help/demodoc.txt", function (data, status) {
+//        if (getPeriod(data)) { //null check
+//            if (getPeriod(data) == 'Monthly') { //period check
+//                if (n == 1 || n == 2 || n == 3 || n == 4 || n == 5 || n == 6 || n == 7 || n == 8 || n == 9 || n == 10 || n == 11 || n == 12) {
+//                    var urlOne = urlify(data);
+//                    window._wfx_settings.show_resource('<img src=' + '"' + urlOne + '">', "red");
+//                }
 //
+//
+//            }
+//
+//        }
+//
+//    });
+//});
+
+
+$(document).ready(function () {
+    //For a monthly shoutout...
+    var d = new Date();
+    var n = d.getDate(); //This will display the date-DD  
+    var period = '';
+    $.get("https://s3-us-west-1.amazonaws.com/help-config-bucket/test/obj.json", function (data, status) {
+        
+        window.shoutout_url = data.tooltips.tooltip1_url;
+        window.tooltip1_url = data.tooltips.tooltip1_url;
+        window.tooltip2_url = data.tooltips.tooltip2_url;
+        window.tooltip3_url = data.tooltips.tooltip3_url;
+
+
+
+    });
+});
+
+//Page Sleep
+//var bool = true;
+//$(document).ready(function () {
+//    bool = true;
+//    setInterval(function () {
+//        if (bool == true) {
+//            window._wfx_flow = 'f863e870-42c0-11e6-8bdf-448a5b5dd1ba';
+//            window._wfx_live && window._wfx_live();
+//            bool = false;
+//        }
+//    }, 10000);
+//
+//});
+
 
 // Whatfix setting change to let the tip come over menu.
 window._wfx_settings.z_refresh = true;
-
 
 // Generic self help widget.
 window._wfx_widget = {
@@ -15,51 +98,6 @@ window._wfx_widget = {
     , "color": "#808080"
 
 };
-
-
-//Logic for Handling Saved Reports-- onclick "Save Button"
-var hashStr = function () {
-    var str = document.location.hash;
-    var patt = new RegExp("odf_pk=");
-    var res = patt.test(str);
-    var reqHash = '';
-    if (res == true) {
-        return reqHash + document.location.hash;
-    } else {
-        return reqHash;
-    }
-}
-
-
-
-
-//Uncomment to change widget colors --Experimantal
-//window._wfx_settings= { "theme":{
-//    "color1":"#2b3f57",
-//    "color2":"#3458a2",
-//    "color3":"#f4f4f4",
-//    "color5":"#2b3f57",
-//    "font":"verdana",
-//    "font_size": "14px",
-//    "line_height":"20px",
-//    "title_size":"16px",
-//    "foot_size":"12px",
-//    "widget_size":"14px",
-//    "font_css":"https://fonts.googleapis.com/css?family=Roboto|Oswald",
-//    "note_style":"italic",
-//}};
-
-//Normalize.css!!
-var normalizeCSS = "<style>\/\/Strong\r\nb\r\n, strong {\r\n    font - weight: inherit;\r\n}\r\n\r\n\r\nb\r\n, strong {\r\n    font - weight: bolder;\r\n}\r\n\r\n\r\n\r\ndfn {\r\n    font - style: italic;\r\n}\r\n\r\n\/\/Headers\r\n\r\nh1 {\r\n\t    display: block;\r\n\t    font-size: 2em;\r\n\t    -webkit-margin-before: 0.67__qem;\r\n\t    -webkit-margin-after: 0.67em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\r\nstrong, b {\r\n    font-weight: bold;\r\n\t}\r\n\r\nh2 {\r\n\t    display: block;\r\n\t    font-size: 1.5em;\r\n\t    -webkit-margin-before: 0.83__qem;\r\n\t    -webkit-margin-after: 0.83em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th3 {\r\n\t    display: block;\r\n\t    font-size: 1.17em;\r\n\t    -webkit-margin-before: 1__qem;\r\n\t    -webkit-margin-after: 1em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th4 {\r\n\t    display: block;\r\n\t    -webkit-margin-before: 1.33__qem;\r\n\t    -webkit-margin-after: 1.33em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th5 {\r\n\t    display: block;\r\n\t    font-size: .83em;\r\n\t    -webkit-margin-before: 1.67__qem;\r\n\t    -webkit-margin-after: 1.67em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th6 {\r\n\t    display: block;\r\n\t    font-size: .67em;\r\n\t    -webkit-margin-before: 2.33__qem;\r\n\t    -webkit-margin-after: 2.33em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\r\n\r\n\/\/Lists\r\nul { \r\n   list-style-type: disc; \r\n   list-style-position: inside; \r\n}\r\nol { \r\n   list-style-type: decimal; \r\n   list-style-position: inside; \r\n}\r\nul ul, ol ul { \r\n   list-style-type: circle; \r\n   list-style-position: inside; \r\n   margin-left: 15px; \r\n}\r\nol ol, ul ol { \r\n   list-style-type: lower-latin; \r\n   list-style-position: inside; \r\n   margin-left: 15px; \r\n}\r\n\r\n\/\/Tables\r\ntable {\r\n\t    display: table;\r\n\t    border-collapse: separate;\r\n\t    border-spacing: 2px;\r\n\t    border-color: gray;\r\n\t}\r\n\t\r\n\tthead {\r\n\t    display: table-header-group;\r\n\t    vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttbody {\r\n\t    display: table-row-group;\r\n vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttfoot {\r\n\t    display: table-footer-group;\r\n\t    vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\t\/* for tables without table section elements (can happen with XHTML or dynamically created tables) *\/\r\n\ttable > tr {\r\n\t    vertical-align: middle;\r\n\t}\r\n\t\r\n\tcol {\r\n\t    display: table-column;\r\n}\r\n\t\r\n\tcolgroup {\r\n\t    display: table-column-group;\r\n\t}\r\n\t\r\n\ttr {\r\n\t    display: table-row;\r\n\t    vertical-align: inherit;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttd, th {\r\n\t    display: table-cell;\r\n\t    vertical-align: inherit;\r\n\t}\r\n\t\r\nth {\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\tcaption {\r\n\t    display: table-caption;\r\n\t    text-align: -webkit-center;\r\n\t}\r\n\r\n\/\/Button\r\nbutton {\r\n\t    -webkit-appearance: button;\r\n}<\/style>";
-
-var toolTipCss = '     <style>\r\n  .ui-tooltip {\r\n    display: inline-block;\r\n    background: #808080;\r\n    border: 2px solid white;\r\n  }\r\n  .ui-tooltip {\r\n    padding: 10px 20px;\r\n    color: white;\r\n    border-radius: 20px;\r\n    box-shadow: 0 0 7px black;\r\n  }\r\n\r\n.tg  {border-collapse:collapse;border-spacing:0;}\r\n.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}\r\n.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}\r\n.tg .tg-yw4l{vertical-align:top}\r\n\r\n \r\n  <\/style>\r\n';
-
-var buttonCss = '<style>\r\n.button-hov {\r\n  display: inline-block;\r\n position: absolute;\r\n right: 20px; inline-block;\r\n  border-radius: 100%;\r\n  background-color: #808080;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  text-align: center;\r\n  font-size: 10px;\r\n  padding: 6px;\r\n  transition: all 0.5s;\r\n  cursor: pointer;\r\n  margin: 5px;\r\n}\r\n\r\n.button-hov span {\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  position: relative;\r\n  transition: 0.5s;\r\n}\r\n\r\n.button-hov span:after {\r\n  content: \'\u00BB\';\r\n  position: absolute;\r\n  opacity: 0;\r\n  top: 0;\r\n  right: 20px;\r\n  transition: 0.5s;\r\n}\r\n\r\n.button-hov:hover span {\r\n  padding-right: 25px;\r\n}\r\n\r\n.button-hov:hover span:after {\r\n  opacity: 1;\r\n  right: 0;\r\n}\r\n<\/style>';
-
-
-//
-// Utilities 
-//
 
 // Generic branch trigger.
 window._wfx_settings.onBeforeShow = function (event) {
@@ -76,14 +114,44 @@ window._wfx_settings['default_page_settings'] = {
     "self_help": {}
 };
 
-// "Validate" & "Show Me How" framework
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//Custom CSS-- Overrides CSS definitions from CA PPM's default stylesheet.
+//Defined as strings with global scope.
+//Un-escaped versions attached.
+
+//Normalize CSS
+//Define/Override CSS for text formatting and tables.
+
+var normalizeCSS = "<style>\/\/Strong\r\nb\r\n, strong {\r\n    font - weight: inherit;\r\n}\r\n\r\n\r\nb\r\n, strong {\r\n    font - weight: bolder;\r\n}\r\n\r\n\r\n\r\ndfn {\r\n    font - style: italic;\r\n}\r\n\r\n\/\/Headers\r\n\r\nh1 {\r\n\t    display: block;\r\n\t    font-size: 2em;\r\n\t    -webkit-margin-before: 0.67__qem;\r\n\t    -webkit-margin-after: 0.67em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\r\nstrong, b {\r\n    font-weight: bold;\r\n\t}\r\n\r\nh2 {\r\n\t    display: block;\r\n\t    font-size: 1.5em;\r\n\t    -webkit-margin-before: 0.83__qem;\r\n\t    -webkit-margin-after: 0.83em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th3 {\r\n\t    display: block;\r\n\t    font-size: 1.17em;\r\n\t    -webkit-margin-before: 1__qem;\r\n\t    -webkit-margin-after: 1em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th4 {\r\n\t    display: block;\r\n\t    -webkit-margin-before: 1.33__qem;\r\n\t    -webkit-margin-after: 1.33em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th5 {\r\n\t    display: block;\r\n\t    font-size: .83em;\r\n\t    -webkit-margin-before: 1.67__qem;\r\n\t    -webkit-margin-after: 1.67em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\th6 {\r\n\t    display: block;\r\n\t    font-size: .67em;\r\n\t    -webkit-margin-before: 2.33__qem;\r\n\t    -webkit-margin-after: 2.33em;\r\n\t    -webkit-margin-start: 0;\r\n\t    -webkit-margin-end: 0;\r\n\t    font-weight: bold;\r\n\t}\r\n\r\n\r\n\/\/Lists\r\nul { \r\n   list-style-type: disc; \r\n   list-style-position: inside; \r\n}\r\nol { \r\n   list-style-type: decimal; \r\n   list-style-position: inside; \r\n}\r\nul ul, ol ul { \r\n   list-style-type: circle; \r\n   list-style-position: inside; \r\n   margin-left: 15px; \r\n}\r\nol ol, ul ol { \r\n   list-style-type: lower-latin; \r\n   list-style-position: inside; \r\n   margin-left: 15px; \r\n}\r\n\r\n\/\/Tables\r\ntable {\r\n\t    display: table;\r\n\t    border-collapse: separate;\r\n\t    border-spacing: 2px;\r\n\t    border-color: gray;\r\n\t}\r\n\t\r\n\tthead {\r\n\t    display: table-header-group;\r\n\t    vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttbody {\r\n\t    display: table-row-group;\r\n vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttfoot {\r\n\t    display: table-footer-group;\r\n\t    vertical-align: middle;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\t\/* for tables without table section elements (can happen with XHTML or dynamically created tables) *\/\r\n\ttable > tr {\r\n\t    vertical-align: middle;\r\n\t}\r\n\t\r\n\tcol {\r\n\t    display: table-column;\r\n}\r\n\t\r\n\tcolgroup {\r\n\t    display: table-column-group;\r\n\t}\r\n\t\r\n\ttr {\r\n\t    display: table-row;\r\n\t    vertical-align: inherit;\r\n\t    border-color: inherit;\r\n\t}\r\n\t\r\n\ttd, th {\r\n\t    display: table-cell;\r\n\t    vertical-align: inherit;\r\n\t}\r\n\t\r\nth {\r\n\t    font-weight: bold;\r\n\t}\r\n\t\r\n\tcaption {\r\n\t    display: table-caption;\r\n\t    text-align: -webkit-center;\r\n\t}\r\n\r\n\/\/Button\r\nbutton {\r\n\t    -webkit-appearance: button;\r\n}<\/style>";
+
+//CSS for the tooltips associated with the "?" icons/buttons.
+
+var toolTipCss = '<style>\r\n  .ui-tooltip {\r\n    display: inline-block;\r\n    background: #808080;\r\n    border: 2px solid white;\r\n  padding: 10px 20px;\r\n    color: white;\r\n    border-radius: 20px;\r\n    box-shadow: 0 0 7px black;}<\/style>';
+
+//CSS for "?" button, includes some animations, hover function definitions.
+
+var buttonCss = '<style>\r\n.button-hov {\r\n  display: inline-block;\r\n position: absolute;\r\n right: 20px; inline-block;\r\n  border-radius: 100%;\r\n  background-color: #808080;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  text-align: center;\r\n  font-size: 10px;\r\n  padding: 6px;\r\n  cursor: pointer;\r\n  margin: 5px;\r\n}\r\n#check {position: relative;z-index: 10000;fill: none;stroke: green;stroke-width: 20;stroke-linecap: round;stroke-dasharray: 180;stroke-dashoffset: 180;  animation: draw 2s 1 ease;}@keyframes draw {  to {    stroke-dashoffset: 0;  }}<\/style>';
+
+//CSS for table borders, used for "Validate 2"
+
+var tableCss = '<style type="text/css">.tg  {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg .tg-yw4l{vertical-align:top}</style>';
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//Buttons
+//Buttons have been defined in this section using jquery.
+
+// "Validate 1" button
 window._wfx_settings.add_button = function (name, button, parentSelector, action) {
     var validate_id = "wfx_" + name + "_validate";
     if (document.getElementById(validate_id)) {
         return;
     }
     var validate = $('<button/>', {
-        text: button
+        html: button
         , class: 'ppm_button button'
         , css: {
             'background': '#ED9126'
@@ -96,14 +164,14 @@ window._wfx_settings.add_button = function (name, button, parentSelector, action
 };
 
 
-//New Button for Validation
+// "Validate 2" button
 window._wfx_settings.add_button_validate_two = function (name, button, parentSelector, action) {
     var validate_two_id = "wfx_" + name + "_validate_two";
     if (document.getElementById(validate_two_id)) {
         return;
     }
     var validate_two = $('<button/>', {
-        text: button
+        html: button 
         , class: 'ppm_button button'
         , css: {
             'background': '#ED9126'
@@ -116,10 +184,7 @@ window._wfx_settings.add_button_validate_two = function (name, button, parentSel
 };
 
 
-
-
-/*--------------------------------------------------------------------------------------*/
-// Report Status Button
+// "Report Status" Button/ "?" icon
 window._wfx_settings.add_button_report_status = function (name, button, parentSelector, action) {
     var report_status_id = "wfx_" + name + "_report_status";
     if (document.getElementById(report_status_id)) {
@@ -151,10 +216,8 @@ window._wfx_settings.add_button_report_status = function (name, button, parentSe
     $(parentSelector).append(report_status);
 };
 
-/*--------------------------------------------------------------------------------------*/
 
-/*--------------------------------------------------------------------------------------*/
-// Schedule Status Button
+// "Schedule Status" Button
 window._wfx_settings.add_button_schedule_status = function (name, button, parentSelector, action) {
     var schedule_status_id = "wfx_" + name + "_schedule_status";
     if (document.getElementById(schedule_status_id)) {
@@ -172,8 +235,9 @@ window._wfx_settings.add_button_schedule_status = function (name, button, parent
             return $(this).prop('title');
         }
         , position: {
-            my: "left+40 top-20"
-            , at: "center top"
+            my: "right center"
+            , at: "left center"
+            , collision: "fitflip fitflip"
             , using: function (position, feedback) {
                 $(this).css(position);
                 $("<div>")
@@ -186,9 +250,7 @@ window._wfx_settings.add_button_schedule_status = function (name, button, parent
     $(parentSelector).append(schedule_status);
 };
 
-/*--------------------------------------------------------------------------------------*/
 
-/*--------------------------------------------------------------------------------------*/
 // Scope Status Button
 window._wfx_settings.add_button_scope_status = function (name, button, parentSelector, action) {
     var scope_status_id = "wfx_" + name + "_scope_status";
@@ -221,10 +283,8 @@ window._wfx_settings.add_button_scope_status = function (name, button, parentSel
     $(parentSelector).append(scope_status);
 };
 
-/*--------------------------------------------------------------------------------------*/
 
-/*--------------------------------------------------------------------------------------*/
-// Cost & Effort Button
+// "Cost & Effort" Button
 window._wfx_settings.add_button_ce_status = function (name, button, parentSelector, action) {
     var ce_status_id = "wfx_" + name + "_ce_status";
     if (document.getElementById(ce_status_id)) {
@@ -256,118 +316,7 @@ window._wfx_settings.add_button_ce_status = function (name, button, parentSelect
     $(parentSelector).append(ce_status);
 };
 
-/*--------------------------------------------------------------------------------------*/
-
-
-///*--------------------------------------------------------------------------------------*/
-// //Report Status Button
-//window._wfx_settings.add_button_report_status = function (name, button, parentSelector, action) {
-//    var report_status_id = "wfx_" + name + "_report_status";
-//    if (document.getElementById(report_status_id)) {
-//        return;
-//    }
-//    var test_field = $('<div/>', {
-//        text: "button"
-//        , class: 'wrapper'
-//        , click: action
-//        , id: report_status_id
-//    });
-//    $(parentSelector).append(report_status);
-//};
-//
-///*--------------------------------------------------------------------------------------*/
-
-
-
-
-/*--------------------------------------------------------------------------------------*/
-// Report Status Button
-//window._wfx_settings.add_button_report_status = function (name, button, parentSelector, action) {
-//    var report_status_id = "wfx_" + name + "_report_status";
-//    if (document.getElementById(report_status_id)) {
-//        return;
-//    }
-//    var report_status = $('<link rel=\"stylesheet\" href=\"https:\/\/cdnjs.cloudflare.com\/ajax\/libs\/balloon-css\/0.3.0\/balloon.min.css\">\r\n\r\n<button data-balloon=\"HTML special characters: &#9787; &#9986; &#9820;\" data-balloon-pos=\"up\">Hover me!<\/button>');
-//    $(parentSelector).append(report_status);
-//};
-
-/*--------------------------------------------------------------------------------------*/
-
-
-
-
-
-//
-///*--------------------------------------------------------------------------------------*/
-//// Schedule Status Button
-//window._wfx_settings.add_button_schedule_status = function (name, button, parentSelector, action) {
-//    var schedule_status_id = "wfx_" + name + "_schedule_status";
-//    if (document.getElementById(schedule_status_id)) {
-//        return;
-//    }
-//    var schedule_status = $('<button/>', {
-//        text: button
-//        , class: 'ppm_button button'
-//        , css: {
-//            'background': '#ED9126'
-//            , 'color': 'white'
-//        }
-//        , click: action
-//        , id: schedule_status_id
-//    });
-//    $(parentSelector).append(schedule_status);
-//};
-//
-///*--------------------------------------------------------------------------------------*/
-//
-//
-///*--------------------------------------------------------------------------------------*/
-//// Cost & Effort Status Button
-//window._wfx_settings.add_button_ce = function (name, button, parentSelector, action) {
-//    var ce_status_id = "wfx_" + name + "_ce_status";
-//    if (document.getElementById(ce_status_id)) {
-//        return;
-//    }
-//    var ce_status = $('<button/>', {
-//        text: button
-//        , class: 'ppm_button button'
-//        , css: {
-//            'background': '#ED9126'
-//            , 'color': 'white'
-//        }
-//        , click: action
-//        , id: ce_status_id
-//    });
-//    $(parentSelector).append(ce_status);
-//};
-//
-///*--------------------------------------------------------------------------------------*/
-//
-//
-///*--------------------------------------------------------------------------------------*/
-//// Scope Status Button
-//window._wfx_settings.add_button_scope = function (name, button, parentSelector, action) {
-//    var scope_status_id = "wfx_" + name + "_scope_status";
-//    if (document.getElementById(scope_status_id)) {
-//        return;
-//    }
-//    var scope_status = $('<button/>', {
-//        text: button
-//        , class: 'ppm_button button'
-//        , css: {
-//            'background': '#ED9126'
-//            , 'color': 'white'
-//        }
-//        , click: action
-//        , id: scope_status_id
-//    });
-//    $(parentSelector).append(scope_status);
-//};
-//
-///*--------------------------------------------------------------------------------------*/
-
-
-
+//Not sure what this function does...
 window._wfx_settings.equals = function (one, two) {
     if (!one) {
         if (!two) {
@@ -384,54 +333,10 @@ window._wfx_settings.equals = function (one, two) {
     }
 };
 
-window._wfx_settings.init_page = function (name, settings) {
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//Message/Popup/Shoutout definitions --jquery
 
-    // Validate button addition.
-    if (settings.validate) {
-        window._wfx_settings.add_button(name, "Validate 1", settings.button_bar, settings.validate);
-    }
-
-    // Validate button addition.
-    if (settings.validate_two) {
-        window._wfx_settings.add_button_validate_two(name, "Validate 2", settings.button_bar, settings.validate_two);
-    }
-
-    //Report Status button addition.
-
-    window._wfx_settings.add_button_report_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Schedule+status.png" alt="Report Status Table" >', settings.button_bar_one);
-
-    //    
-    //    //Schedule Status button addition.
-    //    
-    window._wfx_settings.add_button_schedule_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Schedule+status.png" alt="Report Status Table" >', settings.button_bar_two);
-    //    //Scope Status button addition.
-
-    window._wfx_settings.add_button_scope_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Scope+Status.png" alt="Scope Status Table" >', settings.button_bar_three);
-    //    
-    //    //Cost & Effect Status button addition.
-
-    window._wfx_settings.add_button_ce_status(name, '<img src="https://d2qhvajt3imc89.cloudfront.net/customers/Excers/Cost+and+Effort+status.png" alt="Cost & Effort Table" >', settings.button_bar_four);
-    //    
-    //
-    //    // Show Me How button addition.
-    //    if (settings.show_me) {
-    //        window._wfx_settings.add_button(name, "Show Me How", "td", function () {
-    //            window._wfx_flow = settings.show_me;
-    //            window._wfx_live && window._wfx_live();
-    //        });
-    //    }
-
-    // Update self help widget if required.
-    if (settings.self_help && (!window._wfx_settings.equals(settings.self_help.tags, window._wfx_widget.tags) || !window._wfx_settings.equals(settings.self_help.color, window._wfx_widget.color))) {
-        window._wfx_widget.tags = settings.self_help.tags;
-        window._wfx_widget.filter_by_tag = settings.self_help.tags;
-        window._wfx_widget.color = settings.self_help.color;
-        window._wfx_refresh();
-    }
-};
-
-
-//For General Messages...
+//General Messages
 window._wfx_settings.show_message = function (message, color) {
     var bgWrap = $('<div/>', {
         css: {
@@ -488,13 +393,12 @@ window._wfx_settings.show_message = function (message, color) {
 
 };
 
-//High light features for Demo.
-window._wfx_settings.show_feature = function (message, color) {
-
-    var bgWrap = $('<div/>', {
+//Resources...
+window._wfx_settings.show_resource = function (message, color, width, height) {
+    var bgWrapper = $('<div/>', {
         css: {
             'display': 'block'
-            , 'position': 'fixed'
+            , 'position': 'relative'
             , 'width': '100%'
             , 'height': '100%'
             , 'left': '0'
@@ -504,40 +408,48 @@ window._wfx_settings.show_feature = function (message, color) {
             , 'filter': 'alpha(opacity=70)'
             , 'z-index': '100000'
         }
-    , });
+    });
 
-    var popup = $('<div/>', {
+    var bgWrap = $('<div/>', {
         css: {
             'display': 'block'
-            , 'position': 'absolute'
-            , 'bottom': '0'
-            , 'right': '0'
-            , 'width': '300px'
-            , 'background': '#ffcc00'
-            , 'padding': '50px 50px 50px 20px'
-            , 'border-radius': '50px 50px 5px 50px'
+            , 'position': 'relative'
+            , 'box-shadow': '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'
+            , 'background': '#808080'
+            , 'width': width
+            , 'height': height
+            , 'padding': '20px 20px 50px 20px'
+            , 'border-radius': '4px'
             , 'z-index': '100001'
             , 'margin': '10% auto'
+            , 'align-items': 'center'
         }
     });
     var text = $('<label/>', {
-        //css: { 'line-height' : '1.5em', 'clear': 'both', 'color' : color, 'font': 'Calibri'},
-        //strong: {'font-weight':'bold'},
-        html: normalizeCSS + ' ' + message
+        css: {
+            'color': color
+        }
+        , html: '<center>' + message + '</center>'
     });
-
-    popup.append(text);
-
+    var close = $('<button/>', {
+        class: 'ppm_button button'
+        , css: {
+            'float': 'right'
+            , 'margin': '10px'
+        }
+        , text: 'Close'
+        , click: function () {
+            bgWrap.remove();
+            bgWrapper.remove();
+        }
+    });
+    bgWrap.append(text);
+    bgWrap.append(close);
     $('body').append(bgWrap);
-    $('body').append(popup);
+    $('body').append(bgWrapper);
 
-    $('div[style *= "border-radius: 50px 50px 5px"]').fadeIn(1000).delay(5000).fadeOut(100, function () {
-        popup.remove();
-        bgWrap.remove();
-    });
+
 };
-
-
 
 //Shoutout!!
 window._wfx_settings.shoutout = function (message, color) {
@@ -569,7 +481,55 @@ window._wfx_settings.shoutout = function (message, color) {
         bgWrap.remove()
     });
 };
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+//Invokes functions to add buttons to pages
+
+window._wfx_settings.init_page = function (name, settings) {
+
+    // Validate button addition.
+
+    if (settings.validate) {
+        window._wfx_settings.add_button(name, "&#9888;Validate 1", settings.button_bar, settings.validate);
+    }
+
+    // Validate button addition.
+
+    if (settings.validate_two) {
+        window._wfx_settings.add_button_validate_two(name, "&#9888;Validate 2", settings.button_bar, settings.validate_two);
+    }
+
+    //Report Status button addition.
+
+    window._wfx_settings.add_button_report_status(name, '<img src=' + '"' + window.tooltip1_url + '">', settings.button_bar_one);
+
+    //Schedule Status button addition.
+
+    window._wfx_settings.add_button_schedule_status(name, '<img src=' + '"' + window.tooltip1_url + '">', settings.button_bar_two);
+
+    //Scope Status button addition.
+
+    window._wfx_settings.add_button_scope_status(name, '<img src=' + '"' + window.tooltip2_url + '">', settings.button_bar_three);
+
+    //Cost & Effect Status button addition.
+
+    window._wfx_settings.add_button_ce_status(name, '<img src=' + '"' + window.tooltip3_url + '">', settings.button_bar_four);
+
+    // Update self help widget if required.
+    if (settings.self_help && (!window._wfx_settings.equals(settings.self_help.tags, window._wfx_widget.tags) || !window._wfx_settings.equals(settings.self_help.color, window._wfx_widget.color))) {
+        window._wfx_widget.tags = settings.self_help.tags;
+        window._wfx_widget.filter_by_tag = settings.self_help.tags;
+        window._wfx_widget.color = settings.self_help.color;
+        window._wfx_refresh();
+    }
+};
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 // Page specific settings
 window._wfx_settings.apply_page_settings = function () {
     var self_help_applied;
@@ -594,26 +554,6 @@ window._wfx_settings.apply_page_settings = function () {
 window._wfx_settings.apply_page_settings();
 
 
-//
-// Self Help segmentation based on page location.
-//
-// Home Page.
-//window._wfx_settings['page_settings']['home_page'] = {
-//    "hash": "action:npt.overview"
-//    , "self_help": {
-//        "color": "#808080"
-//    }
-//};
-
-// Timesheet pages.
-window._wfx_settings['page_settings']['timesheet_page'] = {
-    "hash": "timeadmin"
-    , "self_help": {
-        "tags": "328c3ae0-42ba-11e6-969a-448a5b5dd5b8"
-        , "color": "red"
-    }
-};
-
 // Status report page.
 window._wfx_settings['page_settings']['status_report_page'] = {
     "hash": "projectCreate.subObjList.cop_prj_statusrpt"
@@ -630,34 +570,10 @@ window._wfx_settings['page_settings']['dashboard_page'] = {
         "tags": "38f88460-42ba-11e6-969a-448a5b5dd5b8"
     }
 };
-
-//
-// Timesheet flow.
-//
-
-// Handling of time sheet flow to launch from the middle.
-window._wfx_settings['5f95da80-42bc-11e6-969a-448a5b5dd5b8'] = function (event) {
-    var potential_step;
-    if (window.location.hash.startsWith("#action:timeadmin.timesheetBrowser")) {
-        potential_step = 2;
-    } else if (window.location.hash.startsWith("#action:timeadmin.editTimesheet")) {
-        potential_step = 6;
-    }
-    if (potential_step && event.step < potential_step) {
-        return {
-            "position": potential_step
-        };
-    }
-};
-
-// Show Me How button for time sheet.
-window._wfx_settings['page_settings']['create_timesheet'] = {
-    "hash": "#action:timeadmin.editTimesheet", // Timesheet page.
-    "button_bar": "form>.ppm_button_bar", // Button bar.
-    "show_me": "7667a890-49b2-11e6-aba8-448a5b5dd5b8" // Flow to trigger
-};
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 
 
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 //
 // Status report flow.
 //
@@ -665,22 +581,6 @@ window._wfx_settings['page_settings']['create_timesheet'] = {
 // Handling of Status report workflow to launch from the middle.
 window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function (event) {
     var potential_step;
-
-    //    //Shoutout-- Tied to landing page URI
-    //    if(document.documentURI == 'http://ppmcontent.excers.com/niku/nu#action:npt.overview' && event.step!=1){
-    //        window._wfx_settings.shoutout("<h1>SHOUTOUT</h1>",'red');
-    //    }
-
-
-
-
-    ////Highlight Mouse over feature
-
-    //	if (event.step==1) 
-    //		{window._wfx_settings.show_feature('<h2><center>Help Recalls</center></h2><br><strong>Help is able to recognize your last action and restart</strong>', 'Black');
-    //		}
-    ////Highlight Mouse over feature
-    //	if (event.step==5) {window._wfx_settings.show_feature('<h1><center>Brilliant</center></h1><br><strong>Help is resourceful enough to continue walk through dynamically</strong>', 'Black');}
 
     //This section is for restarting the walkthrough relative to current location.	
     if (window.location.hash.startsWith("#action:projmgr.projectList&")) {
@@ -697,7 +597,7 @@ window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function (event) 
     if (window.location.hash.startsWith("#action:odf.cop_prj_statusrptProperties&parent_odf_view=projectCreate.subObjList.cop_prj_statusrpt")) {
         potential_step = 6;
     }
-    //window.alert(potential_step);
+
     if (potential_step && event.step < potential_step) {
         return {
             "position": potential_step
@@ -705,143 +605,201 @@ window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function (event) 
     }
 };
 
+// Resources!!!
+//PDF
+window._wfx_settings['976d9890-55c1-11e6-9ece-448a5b5dd1ba'] = function (event) {
+    var potential_step;
+
+    //Tied to landing page URI 
+    if (document.documentURI.startsWith('http://ppmcontent.excers.com/')) {
+        window._wfx_settings.show_resource('<embed src="https://www.thecssninja.com/demo/gmail_dragout/html5-cheat-sheet.pdf" width="600" height="800" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">', 'red', '600px', '800px');
+    }
+};
+
+//Video
+window._wfx_settings['fb9bf450-55cc-11e6-86b3-448a5b5dd5b8'] = function (event) {
+    var potential_step;
+
+    //Tied to landing page URI
+    if (document.documentURI.startsWith('http://ppmcontent.excers.com/')) {
+        window._wfx_settings.show_resource('<iframe width="420" height="315"src="https://www.youtube.com/embed/qUzeyk4Upsg"></iframe>', 'red', '420px', '315px');
+    }
+};
+
+//Validate 1 button click action
 var status_report_validate = function () {
 
-    var title = "<h3>Status Report Validation Results</h3>";
-    var business_positive_message = "<strong>Form conforms to PMO standards</strong><br>";
-    var business_negative_message = "<strong>Action required to conform with PMO Standards</strong><br></br>";
-    var message = '<style type="text/css">.tg  {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg .tg-yw4l{vertical-align:top}</style>';
-
-    var no_page_errors = 10;
-    var no_page_validations = 10; //Should total the number of validations performed.
-    var display_no_errors = 0.0;
-    var invalid = false;
-    //For name field validation
     var str = document.querySelector('[maxlength="80"]').value;
     var date_regex = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/;
     var res = date_regex.test(str.substring(14)) && str.includes('Week Ending');
-    var valtip = $("<warn/>", {
+    var valtip_one = $("<warn1/>", {
         'class': 'tooltips'
-        , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>This will be really cool if it works!!</msg>'
-    }).append('<style>\r\nwarn.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  height: 30px;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+        , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Enter Report Name in Correct Format: "Week Ending - MM/DD/YYYY"</msg>'
+    }).append('<style>\r\nwarn1.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn1.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn1:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    
+    var valtip_two = $("<warn2/>", {
+        'class': 'tooltips'
+        , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Schedule status is required.</msg>'
+    }).append('<style>\r\nwarn2.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn2.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn2:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    
+    var valtip_three = $("<warn3/>", {
+        'class': 'tooltips'
+        , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Variance Explanation is required when status is not On-Track.</msg>'
+    }).append('<style>\r\nwarn3.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn3.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn3:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    
+    var valtip_four = $("<warn4/>", {
+        'class': 'tooltips'
+        , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Scope Status is Required.</msg>'
+    }).append('<style>\r\nwarn4.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn4.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn4:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    
+    var valtip_five = $("<warn5/>", {
+        'class': 'tooltips'
+        , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Variance Explanation is required when status is not On-Track.</msg>'
+    }).append('<style>\r\nwarn5.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn5.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn5:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    
+    var valtip_six = $("<warn6/>", {
+        'class': 'tooltips'
+        , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Cost & Effort Status is Required.</msg>'
+    }).append('<style>\r\nwarn6.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn6.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn6:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    
+    var valtip_seven = $("<warn7/>", {
+        'class': 'tooltips'
+        , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Variance Explanation is required when status is not On-Track.</msg>'
+    }).append('<style>\r\nwarn7.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn7.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn7:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    
     var repname = $('[maxlength="80"]');
+    var schedule_status = $('[name="cop_schedule_status"]');
+    var schedule_exp = $('[name="cop_schedule_exp"]');
+    var scope_status = $('[name="cop_scope_status"]');
+    var scope_exp = $('[name="cop_scope_exp"]');
+    var costeffort_status = $('[name="cop_cost_eft_status"]');
+    var costeffort_exp = $('[name="cop_effort_exp"]');
+
 
     if (res == false) {
-        $('tick').remove();
-        if (!($('warn').length)) {
-            repname = repname.addClass('animation').append('<style>\r\n.animation{\r\n  animation: .5s animateBorderOne ease infinite;\r\n}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n    outline-color: red;\r\n    box-shadow: 0 0 0 2px red;\r\n  }\r\n}<\/style>');
-            repname = repname.after(valtip);
+        $('tick1').remove();
+        if (!($('warn1').length)) {
+            repname = repname.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 0.5s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            repname = repname.after(valtip_one);
         }
 
     } else {
-        $('warn').remove();
+        $('warn1').remove();
         repname = repname.removeClass("animation");
-        if (!($('tick').length)) {
-            repname.after('<tick>&nbsp;&nbsp;&nbsp;&#10004</tick>');
+        if (!($('tick1').length)) {
+            //repname = repname.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            repname.after('<tick1><font color="blue">&nbsp;&nbsp;&nbsp;&#10004<font></tick1>');
         }
 
     }
 
 
     if ((document.querySelector('[name="cop_schedule_status"]').selectedIndex == 0)) {
-        $('[name="cop_schedule_status"]').css({
-            'border-color': 'red'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Schedule Status Required by PMO.');
+        $('tick2').remove();
+        if (!($('warn2').length)) {
+            schedule_status = schedule_status.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 0.5s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            schedule_status = schedule_status.after(valtip_two);
+        }
     } else {
-        $('[name="cop_schedule_status"]').css({
-            'border-color': 'blue'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Good Job!');
+        $('warn2').remove();
+        schedule_status = schedule_status.removeClass("animation");
+        if (!($('tick2').length)) {
+            //schedule_status = schedule_status.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            schedule_status.after('<tick2><font color="blue">&nbsp;&nbsp;&nbsp;&#10004</font></tick2>');
+        }
     }
 
     if ((document.querySelector('[name="cop_schedule_status"]').selectedIndex != 1) && document.querySelector('[name="cop_schedule_exp"]').value.length == 0) {
-        $('[name="cop_schedule_exp"]').css({
-            'border-color': 'red'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Variance Explanation is required when status is not On Track');
+        $('tick3').remove();
+        if (!($('warn3').length)) {
+            schedule_exp = schedule_exp.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 0.5s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            schedule_exp = schedule_exp.after(valtip_three);
+        }
     } else {
-        $('[name="cop_schedule_exp"]').css({
-            'border-color': 'blue'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Good Job!');
+       $('warn3').remove();
+        schedule_exp = schedule_exp.removeClass("animation");
+        if (!($('tick3').length)) {
+            //schedule_exp = schedule_exp.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            schedule_exp.after('<tick3><font color="blue">&nbsp;&nbsp;&nbsp;&#10004</font></tick3>');
+        }
     }
 
 
     if ((document.querySelector('[name="cop_scope_status"]').selectedIndex == 0)) {
-        $('[name="cop_scope_status"]').css({
-            'border-color': 'red'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Scope Status is required by PMO.');
+        $('tick4').remove();
+        if (!($('warn4').length)) {
+            scope_status = scope_status.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 0.5s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            scope_status = scope_status.after(valtip_four);
+        }
 
     } else {
-        $('[name="cop_scope_status"]').css({
-            'border-color': 'blue'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Good Job!');
+        $('warn4').remove();
+        scope_status = scope_status.removeClass("animation");
+        if (!($('tick4').length)) {
+            //scope_status = scope_status.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            scope_status.after('<tick4><font color="blue">&nbsp;&nbsp;&nbsp;&#10004</font></tick4>');
+        }
     }
 
 
     if ((document.querySelector('[name="cop_scope_status"]').selectedIndex != 1) && document.querySelector('[name="cop_scope_exp"]').value.length == 0) {
-        $('[name="cop_scope_exp"]').css({
-            'border-color': 'red'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Scope Explanation is required when status is not On Track');
-
+        $('tick5').remove();
+        if (!($('warn5').length)) {
+            scope_exp = scope_exp.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 0.5s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            scope_exp = scope_exp.after(valtip_five);
+        }
     } else {
-        $('[name="cop_scope_exp"]').css({
-            'border-color': 'blue'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Good Job!');
+        $('warn5').remove();
+        scope_exp = scope_exp.removeClass("animation");
+        if (!($('tick5').length)) {
+            //scope_exp = scope_exp.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            scope_exp.after('<tick5><font color="blue">&nbsp;&nbsp;&nbsp;&#10004</font></tick5>');
+        }
     }
 
     if ((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex == 0)) {
-        $('[name="cop_cost_eft_status"]').css({
-            'border-color': 'red'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Cost & Effort Status Required by PMO');
+        $('tick6').remove();
+        if (!($('warn6').length)) {
+            costeffort_status = costeffort_status.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 0.5s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            costeffort_status = costeffort_status.after(valtip_six);
+        }
 
     } else {
-        $('[name="cop_cost_eft_status"]').css({
-            'border-color': 'blue'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Good Job!');
+        $('warn6').remove();
+        costeffort_status = costeffort_status.removeClass("animation");
+        if (!($('tick6').length)) {
+            //costeffort_status = costeffort_status.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            costeffort_status.after('<tick6><font color="blue">&nbsp;&nbsp;&nbsp;&#10004<font></tick6>');
+        }
     }
 
 
     if ((document.querySelector('[name="cop_cost_eft_status"]').selectedIndex != 1) && document.querySelector('[name="cop_effort_exp"]').value.length == 0) {
-        $('[name="cop_effort_exp"]').css({
-            'border-color': 'red'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Cost & Effort Explanation is required when status is not On Track');
+         $('tick7').remove();
+        if (!($('warn7').length)) {
+            costeffort_exp = costeffort_exp.addClass('animation').append('<style>\r\n.animation{\r\n  animation: 0.5s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px red;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            costeffort_exp = costeffort_exp.after(valtip_seven);
+        }
 
     } else {
-        $('[name="cop_effort_exp"]').css({
-            'border-color': 'blue'
-        }).css({
-            'cursor': 'pointer'
-        }).attr('title', 'Good Job!');
+        $('warn7').remove();
+        costeffort_exp = costeffort_exp.removeClass("animation");
+        if (!($('tick7').length)) {
+            //costeffort_exp = costeffort_exp.addClass('animation1').append('<style>\r\n.animation1{\r\n  animation: 1s animateBorderOne ease 3;\r\n outline: 2px; box-shadow: 0 0 0 2px blue;}\r\n\r\n@keyframes animateBorderOne {\r\n  to {\r\n  box-shadow: 0 0 0 2px white;\r\n  }\r\n}<\/style>');
+            costeffort_exp.after('<tick7><font color="blue">&nbsp;&nbsp;&nbsp;&#10004</font></tick7>');
+        }
     }
 
 }
 
+
+//Validate 2 button click action
 var status_report_validate_two = function () {
 
     var title = "<h3>Status Report Validation Results</h3>";
     var business_positive_message = "<strong>Form conforms to PMO standards</strong><br>";
     var business_negative_message = "<strong>Action required to conform with PMO Standards</strong><br></br>";
-    var message = '<style type="text/css">.tg  {border-collapse:collapse;border-spacing:0;}.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}.tg .tg-yw4l{vertical-align:top}</style>';
+    var message = tableCss;
 
     var no_page_errors = 10;
     var no_page_validations = 10; //Should total the number of validations performed.
@@ -913,12 +871,12 @@ var status_report_validate_two = function () {
     }
 }
 
+/*----------------------------------------------------------------------------------------------------------------------------------*/
 
 
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//Controlling where the buttons appear, filtered by url hash.
 
-
-
-/*----------------------------------------------------------------------------*/
 // Validate one button for New status report.
 window._wfx_settings['page_settings']['create_status_report'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -935,9 +893,6 @@ window._wfx_settings['page_settings']['update_status_report'] = {
 };
 
 
-/*----------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------*/
 // Validate one button for New status report.
 window._wfx_settings['page_settings']['create_status_report_two'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -954,9 +909,6 @@ window._wfx_settings['page_settings']['update_status_report_two'] = {
 };
 
 
-/*----------------------------------------------------------------------------*/
-
-/*----------------------------------------------------------------------------*/
 // Report Status button for New Status Report.
 window._wfx_settings['page_settings']['report_status_one'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -968,10 +920,8 @@ window._wfx_settings['page_settings']['report_status_two'] = {
     "hash": "#action:odf.cop_prj_statusrptProperties"
     , "button_bar_one": "[title = 'Status Report']"
 };
-/*----------------------------------------------------------------------------*/
 
 
-/*----------------------------------------------------------------------------*/
 // Schedule Status button for New Status Report.
 window._wfx_settings['page_settings']['schedule_status_one'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -985,10 +935,8 @@ window._wfx_settings['page_settings']['schedule_status_two'] = {
     , "button_bar_two": "[title = 'Schedule']"
 
 };
-/*----------------------------------------------------------------------------*/
 
 
-/*----------------------------------------------------------------------------*/
 // Scope Status button for New Status Report.
 window._wfx_settings['page_settings']['scope_status_one'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -996,16 +944,15 @@ window._wfx_settings['page_settings']['scope_status_one'] = {
 
 };
 
+
 // Scope Status button for Existing Status Report.
 window._wfx_settings['page_settings']['scope_status_two'] = {
     "hash": "#action:odf.cop_prj_statusrptProperties"
     , "button_bar_three": "[title = 'Scope']"
 
 };
-/*----------------------------------------------------------------------------*/
 
 
-/*----------------------------------------------------------------------------*/
 // Cost & Effort Status button for New Status Report.
 window._wfx_settings['page_settings']['cost_and_effort_status_one'] = {
     "hash": "#action:odf.subObjectProperties"
@@ -1019,4 +966,11 @@ window._wfx_settings['page_settings']['cost_and_effort_status_two'] = {
     , "button_bar_four": "[title = 'Cost and Effort']"
 
 };
-/*----------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//Additional Comments...
+
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/
+//END//
+/*----------------------------------------------------------------------------------------------------------------------------------*/
