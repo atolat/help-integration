@@ -437,25 +437,59 @@ window._wfx_settings['page_settings']['dashboard_page'] = {
 // Status report flow.
 //
 
+//Kill flow on hash change::
+
+window.bool_port = [0, 0, 0, 0, 0];
+window.onhashchange = function () {
+    console.log(window.bool_port);
+    if ($.inArray(true, [
+            (window.location.hash.startsWith('#action:npt.overview') && (window.bool_port[0] != 1))
+            , (window.location.hash.startsWith('#action:mainnav.work&classCode=project') && (window.bool_port[1] != 1))
+            , (window.location.hash.startsWith('#action:projmgr.projectProperties&id') && (window.bool_port[2] != 1))
+            , (window.location.hash.startsWith('#action:projmgr.projectProperties&odf_view=projectCreate.subObjList.cop_prj_statusrpt&id') && (window.bool_port[3] != 1))
+            , (window.location.hash.startsWith('#action:odf.subObjectProperties&odf_code=cop_prj_statusrpt') && (window.bool_port[4] != 1))]) == -1) {
+        window._wfx_close_live && window._wfx_close_live();
+        console.log("Exit");
+        window.bool_port = [0, 0, 0, 0, 0];
+    }
+};
+
 // Handling of Status report workflow to launch from the middle.
 window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function (event) {
     var potential_step;
 
+    window.bool_port[0] = 1;
+
     //This section is for restarting the walkthrough relative to current location.	
-    if (window.location.hash.startsWith("#action:projmgr.projectList&")) {
+    if (window.location.hash.startsWith("#action:mainnav.work&classCode=project")) {
+
         potential_step = 2;
-    } else if (window.location.hash.startsWith("#action:projmgr.projectProperties&id")) {
-        potential_step = 3;
+
+        window.bool_port[1] = 1;
+
     }
-    if (window.location.hash.includes("cop_prj_statusrpt")) {
+    if (window.location.hash.startsWith("#action:projmgr.projectProperties&id")) {
+
+        potential_step = 3;
+
+        window.bool_port[2] = 1;
+    }
+    if (window.location.hash.startsWith("#action:projmgr.projectProperties&odf_view=projectCreate.subObjList.cop_prj_statusrpt&id")) {
+
         potential_step = 5;
+
+        window.bool_port[3] = 1;
     }
     if (window.location.hash.startsWith("#action:odf.subObjectProperties&odf_code=cop_prj_statusrpt")) {
+
         potential_step = 6;
+
+        window.bool_port[4] = 1;
     }
-    if (window.location.hash.startsWith("#action:odf.cop_prj_statusrptProperties&parent_odf_view=projectCreate.subObjList.cop_prj_statusrpt")) {
-        potential_step = 6;
-    }
+    //    if (window.location.hash.startsWith("#action:odf.cop_prj_statusrptProperties&parent_odf_view=projectCreate.subObjList.cop_prj_statusrpt")) {
+    //        //window.bool_port[4]++;
+    //        potential_step = 6;
+    //    }
 
     if (potential_step && event.step < potential_step) {
         return {
@@ -665,9 +699,9 @@ window._wfx_settings['page_settings']['create_status_report'] = {
 
 // Validate two button for Existing status report.
 window._wfx_settings['page_settings']['update_status_report'] = {
-    "hash": "#action:odf.cop_prj_statusrptProperties",
-    "button_bar": "#ppm_workspace_bb .ppm_button_bar,form .ppm_button_bar",
-    "validate": status_report_validate
+    "hash": "#action:odf.cop_prj_statusrptProperties"
+    , "button_bar": "#ppm_workspace_bb .ppm_button_bar,form .ppm_button_bar"
+    , "validate": status_report_validate
 };
 
 // Report Status button for New Status Report.
