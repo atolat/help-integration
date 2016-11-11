@@ -41,8 +41,13 @@ window._wfx_widget = {
     , "mode": "live_here"
     , "ent_id": "d347a8c0-3d47-11e6-8bdf-448a5b5dd1ba"
     , "order": ["7667a890-49b2-11e6-aba8-448a5b5dd5b8"]
-    , "color": "#808080"
+    , "color": "#4c4b4b"
 
+};
+
+//Generic self help widget LNF
+window._wfx_settings.theme = {
+	"widget_size":"20px",
 };
 
 // Generic branch trigger.
@@ -79,7 +84,7 @@ var toolTipCss = '<style>\r\n.tooltip {\r\n    position: relative;\r\n    displa
 
 //CSS for "?" button, includes some animations, hover function definitions.
 
-var buttonCss = '<style>\r\n.button-hov {\r\n  display: inline-block;\r\n position: absolute;\r\n right: 20px; inline-block;\r\n  border-radius: 100%;\r\n  background-color: #808080;\r\n  border: none;\r\n  color: #FFFFFF;\r\n  text-align: center;\r\n  font-size: 10px;\r\n  padding: 6px;\r\n  cursor: pointer;\r\n  margin: 5px;\r\n}\r\n#check {position: relative;z-index: 10000;fill: none;stroke: green;stroke-width: 20;stroke-linecap: round;stroke-dasharray: 180;stroke-dashoffset: 180;  animation: draw 2s 1 ease;}@keyframes draw {  to {    stroke-dashoffset: 0;  }}<\/style>';
+var buttonCss = '<style>\r\n.button-hov { \r\n display: inline-block;\r\n position: absolute;\r\n right: 20px; inline-block;\r\n border-radius: 84px;\r\n background-color: #1c9a1a;\r\n border: 1px solid #1c9a1a;\r\n color: #FFFFFF;\r\n text-align: center;\r\n font-size: 10px;\r\n padding: 4px 6px 4px 6px;\r\n cursor: pointer;\r\n margin: 4px 10px 0px 0px;\r\n}\r\n#check {position: relative;z-index: 10000;fill: none;stroke: green;stroke-width: 20;stroke-linecap: round;stroke-dasharray: 180;stroke-dashoffset: 180;  animation: draw 2s 1 ease;}@keyframes draw {  to {    stroke-dashoffset: 0;  }}<\/style>';
 
 //CSS for table borders, used for "Validate 2"
 
@@ -355,7 +360,7 @@ window._wfx_settings.init_page = function (name, settings) {
     // Validate button addition.
 
     if (settings.validate) {
-        window._wfx_settings.add_button(name, "&#9888;Validate", settings.button_bar, settings.validate);
+        window._wfx_settings.add_button(name, "Validate", settings.button_bar, settings.validate);
     }
 
     //Report Status button addition.
@@ -417,7 +422,7 @@ window._wfx_settings['page_settings']['status_report_page'] = {
     "hash": "projectCreate.subObjList.cop_prj_statusrpt"
     , "self_help": {
         "tags": "24508e10-42bd-11e6-8bdf-448a5b5dd1ba"
-        , "color": "blue"
+        , "color": "#4c4b4b"
     }
 };
 
@@ -439,57 +444,65 @@ window._wfx_settings['page_settings']['dashboard_page'] = {
 
 //Kill flow on hash change::
 
-window.bool_port = [0, 0, 0, 0, 0];
+window.bool_port = [0, 0, 0,0,0];
 window.onhashchange = function () {
     console.log(window.bool_port);
     if ($.inArray(true, [
             (window.location.hash.startsWith('#action:npt.overview') && (window.bool_port[0] != 1))
+
+            
             , (window.location.hash.startsWith('#action:mainnav.work&classCode=project') && (window.bool_port[1] != 1))
-            , (window.location.hash.startsWith('#action:projmgr.projectProperties&id') && (window.bool_port[2] != 1))
-            , (window.location.hash.startsWith('#action:projmgr.projectProperties&odf_view=projectCreate.subObjList.cop_prj_statusrpt&id') && (window.bool_port[3] != 1))
-            , (window.location.hash.startsWith('#action:odf.subObjectProperties&odf_code=cop_prj_statusrpt') && (window.bool_port[4] != 1))]) == -1) {
+
+            
+            , (window.location.hash.startsWith('#action:projmgr.projectProperties&id') && (window.bool_port[2] != 1)),
+
+            (window.location.hash.startsWith('#action:projmgr.projectProperties&odf_view=projectCreate.subObjList.cop_prj_statusrpt&id') && (window.bool_port[3] != 1)),
+
+            (window.location.hash.startsWith('#action:odf.subObjectProperties&odf_code=cop_prj_statusrpt') && (window.bool_port[4] != 1))]) == -1) {
+
         window._wfx_close_live && window._wfx_close_live();
+
         console.log("Exit");
         window.bool_port = [0, 0, 0, 0, 0];
     }
+
 };
 
 // Handling of Status report workflow to launch from the middle.
 window._wfx_settings['f863e870-42c0-11e6-8bdf-448a5b5dd1ba'] = function (event) {
     var potential_step;
-
+    
     window.bool_port[0] = 1;
 
     //This section is for restarting the walkthrough relative to current location.	
     if (window.location.hash.startsWith("#action:mainnav.work&classCode=project")) {
-
+        
         potential_step = 2;
-
+        
         window.bool_port[1] = 1;
-
-    }
-    if (window.location.hash.startsWith("#action:projmgr.projectProperties&id")) {
-
+        
+    }if (window.location.hash.startsWith("#action:projmgr.projectProperties&id")) {
+       
         potential_step = 3;
-
-        window.bool_port[2] = 1;
+        
+         window.bool_port[2] = 1;
     }
     if (window.location.hash.startsWith("#action:projmgr.projectProperties&odf_view=projectCreate.subObjList.cop_prj_statusrpt&id")) {
-
+        
         potential_step = 5;
-
+        
         window.bool_port[3] = 1;
     }
     if (window.location.hash.startsWith("#action:odf.subObjectProperties&odf_code=cop_prj_statusrpt")) {
-
+        
         potential_step = 6;
-
+        
         window.bool_port[4] = 1;
     }
-    //    if (window.location.hash.startsWith("#action:odf.cop_prj_statusrptProperties&parent_odf_view=projectCreate.subObjList.cop_prj_statusrpt")) {
-    //        //window.bool_port[4]++;
-    //        potential_step = 6;
-    //    }
+//    if (window.location.hash.startsWith("#action:odf.cop_prj_statusrptProperties&parent_odf_view=projectCreate.subObjList.cop_prj_statusrpt")) {
+//        //window.bool_port[4]++;
+//        potential_step = 6;
+//    }
 
     if (potential_step && event.step < potential_step) {
         return {
@@ -515,7 +528,7 @@ window._wfx_settings['fb9bf450-55cc-11e6-86b3-448a5b5dd5b8'] = function (event) 
 
     //Tied to landing page URI
     if (document.documentURI.startsWith('http://ppmcontent.excers.com/')) {
-        window._wfx_settings.show_resource('<iframe width="420" height="315"src="' + window.video_url + '"></iframe>', 'red', '420px', '315px');
+        window._wfx_settings.show_resource('<iframe width="800" height="400" src="' + window.video_url + '"></iframe>', 'red', '800px', '400px');
     }
 };
 
@@ -528,37 +541,37 @@ var status_report_validate = function () {
     var valtip_one = $("<warn1/>", {
         'class': 'tooltips'
         , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Enter Report Name in Correct Format: "Week Ending - MM/DD/YYYY"</msg>'
-    }).append('<style>\r\nwarn1.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn1.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn1:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    }).append('<style>\r\nwarn1.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn1.tooltips msg {\r\n  position: absolute;\r\n width: 235px;\r\n color: #ff0000;\r\n background: #ffffff;\r\n line-height: 30px;\r\n text-align: center;\r\n visibility: hidden;\r\n border-radius: 9px;\r\n font-weight: bold;\r\n border: 2px solid #ff0000;\r\n}\r\nwarn1:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
 
     var valtip_two = $("<warn2/>", {
         'class': 'tooltips'
         , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Schedule status is required.</msg>'
-    }).append('<style>\r\nwarn2.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn2.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn2:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    }).append('<style>\r\nwarn2.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn2.tooltips msg {\r\n  position: absolute;\r\n width: 235px;\r\n color: #ff0000;\r\n background: #ffffff;\r\n line-height: 30px;\r\n text-align: center;\r\n visibility: hidden;\r\n border-radius: 9px;\r\n font-weight: bold;\r\n border: 2px solid #ff0000;\r\n}\r\nwarn2:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
 
     var valtip_three = $("<warn3/>", {
         'class': 'tooltips'
         , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Variance Explanation is required when status is not On-Track.</msg>'
-    }).append('<style>\r\nwarn3.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn3.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn3:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    }).append('<style>\r\nwarn3.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn3.tooltips msg {\r\n  position: absolute;\r\n width: 235px;\r\n color: #ff0000;\r\n background: #ffffff;\r\n line-height: 30px;\r\n text-align: center;\r\n visibility: hidden;\r\n border-radius: 9px;\r\n font-weight: bold;\r\n border: 2px solid #ff0000;\r\n}\r\nwarn3:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
 
     var valtip_four = $("<warn4/>", {
         'class': 'tooltips'
         , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Scope Status is Required.</msg>'
-    }).append('<style>\r\nwarn4.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn4.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn4:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    }).append('<style>\r\nwarn4.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn4.tooltips msg {\r\n  position: absolute;\r\n width: 235px;\r\n color: #ff0000;\r\n background: #ffffff;\r\n line-height: 30px;\r\n text-align: center;\r\n visibility: hidden;\r\n border-radius: 9px;\r\n font-weight: bold;\r\n border: 2px solid #ff0000;\r\n}\r\nwarn4:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
 
     var valtip_five = $("<warn5/>", {
         'class': 'tooltips'
         , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Variance Explanation is required when status is not On-Track.</msg>'
-    }).append('<style>\r\nwarn5.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn5.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn5:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    }).append('<style>\r\nwarn5.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn5.tooltips msg {\r\n  position: absolute;\r\n width: 235px;\r\n color: #ff0000;\r\n background: #ffffff;\r\n line-height: 30px;\r\n text-align: center;\r\n visibility: hidden;\r\n border-radius: 9px;\r\n font-weight: bold;\r\n border: 2px solid #ff0000;\r\n}\r\nwarn5:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
 
     var valtip_six = $("<warn6/>", {
         'class': 'tooltips'
         , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Cost & Effort Status is Required.</msg>'
-    }).append('<style>\r\nwarn6.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn6.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn6:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    }).append('<style>\r\nwarn6.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn6.tooltips msg {\r\n  position: absolute;\r\n width: 235px;\r\n color: #ff0000;\r\n background: #ffffff;\r\n line-height: 30px;\r\n text-align: center;\r\n visibility: hidden;\r\n border-radius: 9px;\r\n font-weight: bold;\r\n border: 2px solid #ff0000;\r\n}\r\nwarn6:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
 
     var valtip_seven = $("<warn7/>", {
         'class': 'tooltips'
         , 'html': '&nbsp;&nbsp;&nbsp;&#9888<msg>Variance Explanation is required when status is not On-Track.</msg>'
-    }).append('<style>\r\nwarn7.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn7.tooltips msg {\r\n  position: absolute;\r\n  width:240px;\r\n  color: #FFFFFF;\r\n  background: red;\r\n  line-height: 30px;\r\n  text-align: center;\r\n  visibility: hidden;\r\n  border-radius: 9px;\r\n}\r\nwarn7:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
+    }).append('<style>\r\nwarn7.tooltips {\r\n  position: relative;\r\n  display: inline-block;\r\n}\r\nwarn7.tooltips msg {\r\n  position: absolute;\r\n width: 235px;\r\n color: #ff0000;\r\n background: #ffffff;\r\n line-height: 30px;\r\n text-align: center;\r\n visibility: hidden;\r\n border-radius: 9px;\r\n font-weight: bold;\r\n border: 2px solid #ff0000;\r\n}\r\nwarn7:hover.tooltips msg {\r\n  visibility: visible;\r\n  opacity: 1;\r\n  left: 100%;\r\n  top: 50%;\r\n  margin-top: -15px;\r\n  margin-left: 15px;\r\n  z-index: 999;\r\n}\r\n}<\/style>');
 
     var repname = $('[maxlength="80"]');
     var schedule_status = $('[name="cop_schedule_status"]');
